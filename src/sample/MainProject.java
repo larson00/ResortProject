@@ -14,8 +14,8 @@ public class MainProject {
 
   void checkLogin(String usernameSent, String passwordSent)
   {
-    usernameSent= usernameSent.toLowerCase();
-    passwordSent= passwordSent.toLowerCase();
+   // usernameSent= usernameSent.toLowerCase();
+    //passwordSent= passwordSent.toLowerCase();
     boolean isNameCorrect=false;
     boolean isPasswordCorrect=false;
     for (String word1: getUsernameList()) {
@@ -24,7 +24,7 @@ public class MainProject {
         isNameCorrect= true;
         //now check password
         for(String word2: getPasswordList()) {
-          if (passwordSent.equalsIgnoreCase(word2)) {
+          if (passwordSent.equals(word2)) {
             System.out.println("Perect");
             isPasswordCorrect= true;
           }

@@ -1,8 +1,21 @@
-package sample;
+package sample;/*package sample;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+
 
 public class Controller {
-  public static void main(String[] args){
-    new MainProject();
 
+  @FXML
+  private Label labelF;
+
+  @FXML
+  void sayHello(ActionEvent event) {
+    labelF.setText("hello");
   }
+
+
 }
+*/
