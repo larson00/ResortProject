@@ -40,7 +40,7 @@ public class FXMLDocumentController {
     private ArrayList<String> usernameList = new ArrayList<>();
     private ArrayList<String> passwordList = new ArrayList<>();
     private ArrayList<Guest> guestList = new ArrayList<>();
-    private List<Room> rooms;
+    private List<Room> rooms = new ArrayList<>();
     private Guest currentGuest;
     private Manager admin;
     enum UserType{

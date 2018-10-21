@@ -177,6 +177,12 @@ private ListView roomListView;
        * Happens after initialize class
        */
       System.out.println("In Constructor");
+      this.usernameList = unLIST;
+      this.passwordList = pwList;
+      this.guestList = gList;
+      this.currentGuest = g1;
+      this.rooms = rooms;
+
 
     }
     /**
