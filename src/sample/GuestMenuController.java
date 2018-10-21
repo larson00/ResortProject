@@ -91,12 +91,7 @@ private Tab tabPayment;
     private Button signoutButton;
     @FXML
     private Button bookRoombutton;
-//    @FXML
-//    private ListView roomListView;
-//    @FXML
-//    protected List<String> rooms = new ArrayList<>();
-//    @FXML
-//    protected ListProperty<String> listProperty = new SimpleListProperty<>();
+
 @FXML
 private ListView roomListView;
 

@@ -287,13 +287,14 @@ public class FXMLDocumentController {
         field2 = getTxtfieldPasswordManager.getText();
 
         String managerUsername = "Nicolo";
-        String managerPassword = "Martin";
+        String managerPassword = "Martina";
         //UserType tyoe= UserType.MANAGER;
         if (field1.equalsIgnoreCase(managerUsername)){
             isNameCorrect= true;
             if (field2.equals(managerPassword)){
                 isPasswordCorrect= true;
                 System.out.println("Login Manager");
+
 
 
             }
@@ -307,11 +308,52 @@ public class FXMLDocumentController {
             System.out.println("Successful Login");
         }
 
+      openManagerMenu();
+    }
+
+  private void openManagerMenu() {
+//  //  ManagerMenuController guestController = new ManagerMenuController(
+//    //    usernameList,passwordList,guestList,rooms
+//    //);
+//    //guestController.storeVariables(usernameList,passwordList,guestList,g1,rooms);
+//    //FXMLLoader loader = new FXMLLoader();
+//
+//
+////  FXMLLoader Loader = new FXMLLoader();
+// // Loader.setLocation(getClass().getResource("ManagerMenuController.fxml")); //Call new window
+//    try {
+//    //  Loader.setController(guestController);
+//      Loader.load(); //Loads
+//    }catch ( IOException ex){
+//      Logger.getLogger(GuestMenuController.class.getName()).log(Level.SEVERE, null ,ex);
+//
+//    }
+//    //  DisplayTextController display = Loader.getController(); //Calling DisplayTextcontroller file
+//    // display.setText(name_Text,email_Text); //using displaytextcontroller's method
+//    //  GuestMenuController storeFields =Loader.getController(); //Calling the new window's  controller
+//    // storeFields.storeVariables(usernameList,passwordList,guestList,g1,rooms); //Calling the controller's method
+//    //Store Variables will store the lists of users, passwords and guest
+//    //GuestMenu's store Variables also takes the guest selected by user.
+//    //
+    //Stage stageExit = (Stage) buttonExit1.getScene().getWindow();
+    //stageExit.close();
+    FXMLLoader Loader = new FXMLLoader();
+    Loader.setLocation(getClass().getResource("ManagerMenu.fxml"));
+    try {
+      Loader.load();
+    }catch ( IOException ex){
+      Logger.getLogger(GuestMenuController.class.getName()).log(Level.SEVERE, null ,ex);
 
     }
 
+    Parent p = Loader.getRoot();
+    Stage stage = new Stage();
+    stage.setScene(new Scene(p));
+    stage.show();
+  }
 
-    @FXML
+
+  @FXML
     void handleButtonCreate(ActionEvent event){
 
         String field1, field2;
