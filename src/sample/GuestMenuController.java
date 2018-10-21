@@ -46,14 +46,17 @@ public class GuestMenuController implements Initializable {
   private Guest currentGuest;
   private Room roomClickedOn;
   private int daysStaying;
+  private boolean initializedRooms=false;
 
   @FXML
   public void storeVariables(ArrayList<String> unLIST, ArrayList<String> pwList,
-      ArrayList<Guest> gList, Guest g1){
+      ArrayList<Guest> gList, Guest g1,List<Room> rooms){
+    System.out.println("HERE FIRST?");
     this.usernameList = unLIST;
     this.passwordList = pwList;
     this.guestList = gList;
     this.currentGuest = g1;
+    this.rooms = rooms;
     int i=0;
     for (String word :usernameList){
       System.out.println("Name = " + word);
@@ -156,7 +159,7 @@ private ListView roomListView;
       //  DisplayTextController display = Loader.getController(); //Calling DisplayTextcontroller file
       // display.setText(name_Text,email_Text); //using displaytextcontroller's method
       FXMLDocumentController storeFields =Loader.getController();
-      storeFields.storeVariables1(usernameList,passwordList,guestList);
+      storeFields.storeVariables1(usernameList,passwordList,guestList,rooms);
 
 
       Parent p = Loader.getRoot();
@@ -168,7 +171,14 @@ private ListView roomListView;
 
     }
 
+    GuestMenuController(ArrayList<String> unLIST, ArrayList<String> pwList,
+        ArrayList<Guest> gList, Guest g1,List<Room> rooms){
+      /**
+       * Happens after initialize class
+       */
+      System.out.println("In Constructor");
 
+    }
     /**
      * Initializes the controller class.
      */
@@ -176,12 +186,21 @@ private ListView roomListView;
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
       System.out.println("HERE IN INTAILIZE");
-      rooms.add(new Room("1A",false,200));
-      rooms.get(0).setAvailable(false);
-      rooms.add(new Room("Room 2A",true,300));
-      rooms.get(1).setAvailable(true);
-      rooms.add(new Room("Room 3A",false,500));
-      rooms.get(2).setAvailable(false);
+
+      if (rooms.isEmpty())
+      {
+        System.out.println("ROOM OS EMPTY \n\n\n");
+        rooms.add(new Room("1A",false,200));
+        rooms.get(0).setAvailable(false);
+        rooms.get(0).setOccupiedGuest(new Guest("BruceWayne","batman"));//John Doe occupies room 1A
+        rooms.add(new Room("Room 2A",true,300));
+        rooms.get(1).setAvailable(true);
+        rooms.add(new Room("Room 3A",false,500));
+        rooms.get(2).setAvailable(false);
+        rooms.get(2).setOccupiedGuest(new Guest("ClarkKent","superman"));//John Doe occupies room 1A
+      }
+
+
       roomListView.itemsProperty().bind(listProperty);
 
       listProperty.set(FXCollections.observableArrayList(rooms));
@@ -191,7 +210,7 @@ private ListView roomListView;
         @Override
         public void handle(MouseEvent event) {
           String roomSelected = roomListView.getSelectionModel().getSelectedItem().toString();
-          System.out.println("To string:"+roomSelected.toString());
+          //System.out.println("To string:"+roomSelected.toString());
 
           for (Room r: rooms
           ) {
@@ -201,11 +220,11 @@ private ListView roomListView;
               //Same toString same, set currentRoom to r
 
             }
-            System.out.println(r.getName());
+           // System.out.println(r.getName());
           }
           System.out.println("Here IS : "+roomSelected);
          // System.out.println("clicked on " + roomListView.getSelectionModel().getSelectedItem());
-          
+
           //Check Room Avability.
           displayRoomFeatures(roomClickedOn);
 
@@ -237,6 +256,8 @@ private ListView roomListView;
     labelPaymentSuccess.setText("Payment Success");
     roomClickedOn.setAvailable(false);
     roomClickedOn.setOccupiedGuest(currentGuest);
+    System.out.println("Room:"+roomClickedOn.getName() +" Availe:"+roomClickedOn.getAvailable() + " guest: "+
+        roomClickedOn.getOccupiedGuest().getUserName());
 
   }
 }

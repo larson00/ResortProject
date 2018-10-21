@@ -5,8 +5,10 @@
  */
 package sample;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -16,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -37,6 +40,7 @@ public class FXMLDocumentController {
     private ArrayList<String> usernameList = new ArrayList<>();
     private ArrayList<String> passwordList = new ArrayList<>();
     private ArrayList<Guest> guestList = new ArrayList<>();
+    private List<Room> rooms;
     private Guest currentGuest;
     private Manager admin;
     enum UserType{
@@ -45,17 +49,33 @@ public class FXMLDocumentController {
     }
     @FXML
   public void storeVariables1(ArrayList<String> unLIST, ArrayList<String> pwList,
-      ArrayList<Guest> gList){
+      ArrayList<Guest> gList,List<Room> rooms){
       //To send and store varaibles across windows.
     this.usernameList = unLIST;
     this.passwordList = pwList;
     this.guestList = gList;
+    this.rooms = rooms;
     int i=0;
     for (String word :usernameList){
       System.out.println("Name = " + word);
       System.out.println(passwordList.get(i));
       i++;
     }
+      for (Room r: rooms) {
+        System.out.println("Room:" +r.getName()
+            + " Price "+ r.getPrice()
+            + " Avail: "+r.getAvailable()
+        //    + " Guest Name: "+r.getOccupiedGuest().getUserName()
+        );
+        // System.out.println(r.getName());
+        if (r.occupiedGuest==null)
+        {
+          System.out.println("NULL GUEST");
+        }else{
+          System.out.println("Guest name"+r.getOccupiedGuest().getUserName());
+        }
+      }
+
     }
 
 
@@ -72,9 +92,15 @@ public class FXMLDocumentController {
 //            e.printStackTrace();
 //        }
 
+      GuestMenuController guestController = new GuestMenuController(usernameList,passwordList,guestList,g1,rooms);
+      //guestController.storeVariables(usernameList,passwordList,guestList,g1,rooms);
+      //FXMLLoader loader = new FXMLLoader();
+
+
       FXMLLoader Loader = new FXMLLoader();
       Loader.setLocation(getClass().getResource("GuestMenu.fxml")); //Call new window
       try {
+        Loader.setController(guestController);
         Loader.load(); //Loads
       }catch ( IOException ex){
         Logger.getLogger(GuestMenuController.class.getName()).log(Level.SEVERE, null ,ex);
@@ -82,8 +108,8 @@ public class FXMLDocumentController {
       }
       //  DisplayTextController display = Loader.getController(); //Calling DisplayTextcontroller file
       // display.setText(name_Text,email_Text); //using displaytextcontroller's method
-      GuestMenuController storeFields =Loader.getController(); //Calling the new window's  controller
-      storeFields.storeVariables(usernameList,passwordList,guestList,g1); //Calling the controller's method
+    //  GuestMenuController storeFields =Loader.getController(); //Calling the new window's  controller
+     // storeFields.storeVariables(usernameList,passwordList,guestList,g1,rooms); //Calling the controller's method
       //Store Variables will store the lists of users, passwords and guest
       //GuestMenu's store Variables also takes the guest selected by user.
       //
@@ -199,7 +225,7 @@ public class FXMLDocumentController {
     private TextField txtfieldUsername;
 
     @FXML
-    private TextField txtfieldPassword;
+    private PasswordField textFieldPassword;
 
     @FXML
     private Button buttonExit;
@@ -237,7 +263,7 @@ public class FXMLDocumentController {
 
         String field1, field2;
         field1 = txtfieldUsername.getText();
-        field2 = txtfieldPassword.getText();
+        field2 = textFieldPassword.getText();
         UserType tyoe= UserType.GUEST;
         checkLogin(field1,field2);
 
@@ -259,6 +285,7 @@ public class FXMLDocumentController {
         String field1, field2;
         field1 = getTxtfieldUsernameManager.getText();
         field2 = getTxtfieldPasswordManager.getText();
+
         String managerUsername = "Nicolo";
         String managerPassword = "Martin";
         //UserType tyoe= UserType.MANAGER;
@@ -286,18 +313,23 @@ public class FXMLDocumentController {
 
     @FXML
     void handleButtonCreate(ActionEvent event){
+
         String field1, field2;
         field1 = txtfieldUsername.getText();
-        field2 = txtfieldPassword.getText();
+        field2 = textFieldPassword.getText();
         System.out.println(field1+" "+field2);
         Guest createGuest;
-        createGuest(field1,field2);
-
-        createGuest("john doe","password");
-        createGuest("jane doe","qwerty");
-        createGuest("Juan Doe","asdf");
+        if (guestList.isEmpty()){
+          //Since first time running this code, make default guestlist
+          createGuest(field1,field2);
+          createGuest("john doe","password");
+          createGuest("jane doe","qwerty");
+          createGuest("Juan Doe","asdf");
+        }else{
+          createGuest(field1,field2);
+        }
         int i=0;
-
+      System.out.println("\n");
         for (String word :getUsernameList()){
             System.out.println("Name = " + word);
             System.out.println(getPasswordList().get(i));
