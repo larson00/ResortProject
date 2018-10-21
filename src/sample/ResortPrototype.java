@@ -15,14 +15,14 @@ import javafx.stage.Stage;
  *
  * @author ggrab
  */
-public class Main extends Application {
-
+public class ResortPrototype extends Application {
+    
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-
+        
         Scene scene = new Scene(root);
-
+        
         stage.setScene(scene);
         stage.show();
     }
@@ -33,5 +33,5 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
+    
 }
