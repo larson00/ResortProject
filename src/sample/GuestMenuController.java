@@ -23,9 +23,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javax.swing.Action;
+import javax.swing.text.html.ImageView;
 
 /**
  * FXML Controller class
@@ -37,6 +44,8 @@ public class GuestMenuController implements Initializable {
   private ArrayList<String> passwordList;
   private ArrayList<Guest> guestList;
   private Guest currentGuest;
+  private Room roomClickedOn;
+  private int daysStaying;
 
   @FXML
   public void storeVariables(ArrayList<String> unLIST, ArrayList<String> pwList,
@@ -55,6 +64,24 @@ public class GuestMenuController implements Initializable {
 
 
   }
+  @FXML
+  private Label labelTotalPriceShow,paymentSucces,labelPaymentSuccess;
+
+  @FXML
+  private Button buttonConfirmPayment;
+
+  @FXML
+  private TabPane tabPane;
+@FXML
+private Tab tabPayment;
+    @FXML
+    private Label labelAvailable;
+  @FXML
+  private Label labelPricePerDay;
+  @FXML
+  private TextField textFieldDaysStaying;
+//  @FXML
+//  private ImageView imageViewRoom;
 
 
     @FXML
@@ -69,24 +96,39 @@ public class GuestMenuController implements Initializable {
 //    protected ListProperty<String> listProperty = new SimpleListProperty<>();
 @FXML
 private ListView roomListView;
+
+
+
   @FXML
   protected List<Room> rooms = new ArrayList<>();
   @FXML
   protected ListProperty<Room> listProperty = new SimpleListProperty<>();
 
 
+
     @FXML
     public void handleBookRoom(ActionEvent event){
-      System.out.println("Hiiiii");
+      Boolean success= true;
+      tabPane.getSelectionModel().select(tabPayment);
+      try{
+        daysStaying =Integer.parseInt(textFieldDaysStaying.getText());
+      }catch (NumberFormatException exception){
+        labelTotalPriceShow.setText("Error, Invalid Input");
+        buttonConfirmPayment.setDisable(true);
+        success= false;
+      }
+      if (success==true){
+        buttonConfirmPayment.setDisable(false);
+        System.out.println("here");
+        labelTotalPriceShow.setText(Double.toString(roomClickedOn.getPrice() * daysStaying));
+      }
+
+
+
 
 
   }
 
-  @FXML
-  public void handleRoomClick(MouseEvent event){
-    System.out.println("Click Room");
-
-  }
 
     @FXML
     public void handleSignout(ActionEvent event){
@@ -134,9 +176,12 @@ private ListView roomListView;
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
       System.out.println("HERE IN INTAILIZE");
-      rooms.add(new Room("1A"));
-      rooms.add(new Room("Room 2A"));
-      rooms.add(new Room("Room 3A"));
+      rooms.add(new Room("1A",false,200));
+      rooms.get(0).setAvailable(false);
+      rooms.add(new Room("Room 2A",true,300));
+      rooms.get(1).setAvailable(true);
+      rooms.add(new Room("Room 3A",false,500));
+      rooms.get(2).setAvailable(false);
       roomListView.itemsProperty().bind(listProperty);
 
       listProperty.set(FXCollections.observableArrayList(rooms));
@@ -146,12 +191,52 @@ private ListView roomListView;
         @Override
         public void handle(MouseEvent event) {
           String roomSelected = roomListView.getSelectionModel().getSelectedItem().toString();
+          System.out.println("To string:"+roomSelected.toString());
+
+          for (Room r: rooms
+          ) {
+            if (r.toString().equalsIgnoreCase(roomSelected)){
+              roomClickedOn= r;
+              System.out.println("Room: "+roomClickedOn.getName());
+              //Same toString same, set currentRoom to r
+
+            }
+            System.out.println(r.getName());
+          }
           System.out.println("Here IS : "+roomSelected);
-          System.out.println("clicked on " + roomListView.getSelectionModel().getSelectedItem());
+         // System.out.println("clicked on " + roomListView.getSelectionModel().getSelectedItem());
+          
+          //Check Room Avability.
+          displayRoomFeatures(roomClickedOn);
+
         }
 
       });
 
-    }    
-    
+    }
+
+  private void displayRoomFeatures(Room roomClickedOn) {
+      if (roomClickedOn.getAvailable()){
+        //true
+        labelAvailable.setText("Available");
+        bookRoombutton.setDisable(false);
+
+      }else
+      {
+        labelAvailable.setText("Not Available");
+        bookRoombutton.setDisable(true);
+
+      }
+      labelPricePerDay.setText(Double.toString(roomClickedOn.getPrice()));
+
+
+
+  }
+
+  public void handleConfirmPayment(ActionEvent event) {
+    labelPaymentSuccess.setText("Payment Success");
+    roomClickedOn.setAvailable(false);
+    roomClickedOn.setOccupiedGuest(currentGuest);
+
+  }
 }

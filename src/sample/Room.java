@@ -9,8 +9,17 @@ public class Room {
   String name;
   String pictureUrl;
   int squareFt;
-  boolean isAvailble;
-  int price;
+  boolean isAvailable;
+  double price;
+  Guest occupiedGuest;
+
+  public Guest getOccupiedGuest() {
+    return occupiedGuest;
+  }
+
+  public void setOccupiedGuest(Guest occupiedGuest) {
+    this.occupiedGuest = occupiedGuest;
+  }
 
   public String getName() {
     return name;
@@ -36,19 +45,25 @@ public class Room {
     this.squareFt = squareFt;
   }
 
-  public boolean isAvailble() {
-    return isAvailble;
+  public boolean getAvailable() {
+    return isAvailable;
   }
 
-  public void setAvailble(boolean availble) {
-    isAvailble = availble;
+  public void setAvailable(boolean available) {
+    isAvailable = available;
   }
 
-  public int getPrice() {
+  public double getPrice() {
     return price;
   }
 
-  public void setPrice(int price) {
+  public void setPrice(double price) {
+    this.price = price;
+  }
+
+  public Room(String name, boolean isAvailable, int price) {
+    this.name = name;
+    this.isAvailable = isAvailable;
     this.price = price;
   }
 
