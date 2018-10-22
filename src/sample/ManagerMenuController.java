@@ -27,7 +27,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -88,12 +91,29 @@ public class ManagerMenuController implements Initializable {
     @FXML
     private ListView roomListView;
 
+    @FXML
+    TableColumn columnEmployeeID,columnNameEmployee,columnPayroll;
+    @FXML
+    Tab tabEmployeeList;
+    @FXML
+    TableView tableViewEmployees;
+
+
+
+
+
 
 
     @FXML
     protected List<Room> rooms = new ArrayList<>();
     @FXML
     protected ListProperty<Room> listProperty = new SimpleListProperty<>();
+
+    @FXML
+    protected List<Employee> employees = new ArrayList<>();
+    @FXML
+    protected ListProperty<Employee> listPropertyEmployee = new SimpleListProperty<>();
+
 
 
 
@@ -233,12 +253,12 @@ public class ManagerMenuController implements Initializable {
     private void displayRoomFeatures(Room roomClickedOn) {
         if (roomClickedOn.getAvailable()){
             //true
-            labelAvailable.setText("Booked");
+            labelAvailable.setText("Not Book");
             //bookRoombutton.setDisable(false);
 
         }else
         {
-            labelAvailable.setText("Not Booked");
+            labelAvailable.setText("Booked");
             //bookRoombutton.setDisable(true);
 
         }
@@ -253,11 +273,59 @@ public class ManagerMenuController implements Initializable {
             labelGuestName.setText("None");
 
         }
+        }
+
+
+
+//        public void EmployeeWindow(){
+//            System.out.println("HERE IN INTAILIZE MANAGER");
+//
+//            if (employees.isEmpty())
+//            {
+//                System.out.println("Employees is empty \n\n\n");
+//                employees.add(new Employee("Brad",9.5,1));
+//
+//                employees.add(new Employee("Tom",11.5,2));
+//                employees.add(new Employee("Pete",8.0,3));
+//
+//            }
+
+
+       //     tableViewEmployees.itemsProperty().bind(listProperty);
+     //       columnEmployeeID.setCellFactory(new PropertyValueFactory<Employee, String>("EmployeeID"));
+
+            //tableViewEmployees.set(FXCollections.observableArrayList(employees));
+           // tableViewEmployees.setCellFactory(new RoomCellFactory());
+         //   tableViewEmployees.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+//                @Override
+//                public void handle(MouseEvent event) {
+//                    String employeeSelected = tableViewEmployees.getSelectionModel().getSelectedItem().toString();
+//                    //System.out.println("To string:"+roomSelected.toString());
+//
+//                    for (Employee emp: employees
+//                    ) {
+//                        if (emp.toString().equalsIgnoreCase(employeeSelected)){
+//                            employeeClickedon= emp;
+//                            System.out.println("Room: "+roomClickedOn.getName());
+//                            //Same toString same, set currentRoom to r
+//
+//                        }
+//                        // System.out.println(r.getName());
+//                    }
+//                    System.out.println("Here iszzz : "+roomSelected);
+//                    // System.out.println("clicked on " + roomListView.getSelectionModel().getSelectedItem());
+//
+//                    //Check Room Avability.
+//                    displayRoomFeatures(roomClickedOn);
+//
+//                }
+
+        }
 
 
 
 
-    }
 
 
-}
+

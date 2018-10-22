@@ -16,19 +16,19 @@
    <children>
       <TabPane prefHeight="349.0" prefWidth="347.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Employee List">
+          <Tab fx:id="tabEmployeeList" text="Employee List">
             <content>
                   <AnchorPane>
                      <children>
-                        <TableView layoutX="65.0" layoutY="14.0" prefHeight="236.0" prefWidth="228.0">
+                        <TableView fx:id="tableViewEmployees" layoutX="65.0" layoutY="14.0" prefHeight="236.0" prefWidth="228.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Employee ID" />
-                            <TableColumn prefWidth="75.0" text="Name" />
-                              <TableColumn prefWidth="75.0" text="Payroll" />
+                            <TableColumn fx:id="columnEmployeeID" prefWidth="75.0" text="Employee ID" />
+                            <TableColumn fx:id="columnNameEmployee" prefWidth="75.0" text="Name" />
+                              <TableColumn fx:id="columnPayroll" prefWidth="75.0" text="Payroll" />
                           </columns>
                         </TableView>
-                        <Button layoutX="182.0" layoutY="264.0" mnemonicParsing="false" text="Add" />
-                        <Button layoutX="226.0" layoutY="264.0" mnemonicParsing="false" text="Delete" />
+                        <Button fx:id="buttonAdd" layoutX="182.0" layoutY="264.0" mnemonicParsing="false" text="Add" />
+                        <Button fx:id="buttonDelete" layoutX="226.0" layoutY="264.0" mnemonicParsing="false" text="Delete" />
                         <Text layoutX="81.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modify Employee:" />
                      </children>
                   </AnchorPane>
@@ -44,7 +44,7 @@
                         <TextField layoutX="138.0" layoutY="81.0" />
                         <TextField layoutX="138.0" layoutY="116.0" />
                         <TextField layoutX="138.0" layoutY="153.0" />
-                        <Button layoutX="179.0" layoutY="189.0" mnemonicParsing="false" text="Submit" />
+                        <Button fx:id="buttonSumbit" layoutX="179.0" layoutY="189.0" mnemonicParsing="false" text="Submit" />
                         <Label layoutX="138.0" layoutY="224.0" text="Employee Edited Succesfully" />
                      </children>
                   </AnchorPane>

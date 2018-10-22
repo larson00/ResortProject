@@ -1,8 +1,13 @@
 package sample;
 
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.util.Callback;
+
 public class Employee {
   String name,title;
-  int payHourly,id;
+  double payHourly;
+  int id;
 
   public String getName() {
 
@@ -21,7 +26,7 @@ public class Employee {
     this.title = title;
   }
 
-  public int getPayHourly() {
+  public double getPayHourly() {
     return payHourly;
   }
 
@@ -37,12 +42,47 @@ public class Employee {
     this.id = id;
   }
 
-  public Employee(String name, String title, int payHourly, int id) {
+  public Employee(String name, double payHourly, int id) {
     this.name = name;
-    this.title = title;
+    //this.title = title;
     this.payHourly = payHourly;
     this.id = id;
   }
 
+
+}
+
+class EmployeeCell  extends ListCell<Employee>
+{
+  @Override
+  public void updateItem(Employee item, boolean empty)
+  {
+    super.updateItem(item, empty);
+
+    int index = this.getIndex();
+    String name = null;
+
+    // Format name
+    if (item == null || empty)
+    {
+    }
+    else
+    {
+      name = (index + 1) + ". " +
+          item.getName() + ", ";
+    }
+
+    this.setText(name);
+    setGraphic(null);
+  }
+}
+
+
+class EmployeeCellFactory implements Callback<ListView<Employee>, ListCell<Employee>> {
+
+  @Override
+  public ListCell<Employee> call(ListView<Employee> listview) {
+    return new EmployeeCell();
+  }
 
 }
