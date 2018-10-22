@@ -5,12 +5,16 @@
  */
 package sample;
 
+import com.sun.javafx.scene.control.behavior.PasswordFieldBehavior;
+import com.sun.javafx.scene.control.skin.TextFieldSkin;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +46,7 @@ public class FXMLDocumentController {
     private ArrayList<Guest> guestList = new ArrayList<>();
     private List<Room> rooms = new ArrayList<>();
     private Guest currentGuest;
+  private  ObservableList<Employee> data= FXCollections.observableArrayList();
     private Manager admin;
     enum UserType{
         GUEST,MANAGER
@@ -49,12 +54,13 @@ public class FXMLDocumentController {
     }
     @FXML
   public void storeVariables1(ArrayList<String> unLIST, ArrayList<String> pwList,
-      ArrayList<Guest> gList,List<Room> rooms){
+      ArrayList<Guest> gList,List<Room> rooms,ObservableList<Employee> data){
       //To send and store varaibles across windows.
     this.usernameList = unLIST;
     this.passwordList = pwList;
     this.guestList = gList;
     this.rooms = rooms;
+    this.data = data;
     int i=0;
     for (String word :usernameList){
       System.out.println("Name = " + word);
@@ -96,7 +102,7 @@ public class FXMLDocumentController {
       Stage stage = (Stage) buttonCreate.getScene().getWindow();
             stage.close();
 
-      GuestMenuController guestController = new GuestMenuController(usernameList,passwordList,guestList,g1,rooms);
+      GuestMenuController guestController = new GuestMenuController(usernameList,passwordList,guestList,g1,rooms,data);
       //guestController.storeVariables(usernameList,passwordList,guestList,g1,rooms);
       //FXMLLoader loader = new FXMLLoader();
 
@@ -239,7 +245,7 @@ public class FXMLDocumentController {
     private TextField getTxtfieldUsernameManager;
 
     @FXML
-    private TextField getTxtfieldPasswordManager;
+    private PasswordField getTxtfieldPasswordManager;
 
     @FXML
     private Button buttonManagerLogin;
@@ -342,13 +348,13 @@ public class FXMLDocumentController {
 
 
 
-    ManagerMenuController guestController = new ManagerMenuController(usernameList,passwordList,guestList,rooms);
+    ManagerMenuController managerController = new ManagerMenuController(usernameList,passwordList,guestList,rooms,data);
     Stage stageExit = (Stage) buttonExit1.getScene().getWindow();
     stageExit.close();
     FXMLLoader Loader = new FXMLLoader();
     Loader.setLocation(getClass().getResource("ManagerMenu.fxml")); //Call new window
     try {
-      Loader.setController(guestController);
+      Loader.setController(managerController);
       Loader.load(); //Loads
     }catch ( IOException ex){
       Logger.getLogger(ManagerMenuController.class.getName()).log(Level.SEVERE, null ,ex);
@@ -368,6 +374,7 @@ public class FXMLDocumentController {
 // storeFields.storeVariables2(usernameList,passwordList,guestList,rooms); //Calling the controller's method
     //Dont' do these two lines again. What happens first is Controller's intilize with makez default 3 rooms.
     //And then it gets set with the empty room the second send it cassing error. We have a better way doing this.
+
     Parent p = Loader.getRoot();
     Stage stage = new Stage();
     stage.setTitle("Manager Menu");

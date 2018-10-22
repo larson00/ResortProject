@@ -14,12 +14,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,12 +32,19 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -47,8 +59,13 @@ public class ManagerMenuController implements Initializable {
     private ArrayList<Guest> guestList;
     private Guest currentGuest;
     private Room roomClickedOn;
+    private Employee employeeClickedOn;
     private int daysStaying;
     private boolean initializedRooms=false;
+    @FXML
+    private TableView<Employee> employeeTable = new TableView<Employee>();
+    private ObservableList<Employee> data;
+    final HBox hb = new HBox();
 
     @FXML
     public void storeVariables2(ArrayList<String> unLIST, ArrayList<String> pwList,
@@ -91,15 +108,12 @@ public class ManagerMenuController implements Initializable {
     @FXML
     private ListView roomListView;
 
-    @FXML
-    TableColumn columnEmployeeID,columnNameEmployee,columnPayroll;
+    ///@FXML
+    //TableColumn columnEmployeeID,columnNameEmployee,columnPayroll;
     @FXML
     Tab tabEmployeeList;
-    @FXML
-    TableView tableViewEmployees;
-
-
-
+    //@FXML
+  //  TableView tableViewEmployees;
 
 
 
@@ -109,10 +123,84 @@ public class ManagerMenuController implements Initializable {
     @FXML
     protected ListProperty<Room> listProperty = new SimpleListProperty<>();
 
-    @FXML
-    protected List<Employee> employees = new ArrayList<>();
+ //   @FXML
+    //protected List<Employee> employees = new ArrayList<>();
     @FXML
     protected ListProperty<Employee> listPropertyEmployee = new SimpleListProperty<>();
+
+
+    @FXML private TableView<Employee> tableViewEmployees;
+    @FXML private TableColumn<Employee, Integer> columnEmployeeID;
+    @FXML private TableColumn<Employee, String> columnNameEmployee;
+    @FXML private TableColumn<Employee, Double> columnPayroll;
+    @FXML private Button buttonAdd, buttonDelete;
+
+    @FXML private Button buttonSubmit;
+    @FXML private TextField textFieldEmpName,textFieldEmpID,textFieldEmpPayRoll;
+    @FXML private Label labelSuccessSubmit;
+    @FXML private Tab tabAddEmployee;
+
+    @FXML void handleAddButton(){
+        tabAddEmployee.setDisable(false);
+        tabPane.getSelectionModel().select(tabAddEmployee);
+
+    }
+    @FXML void handleSubmit(){
+        Boolean successful11=true;
+        String empName= textFieldEmpName.getText();
+        int empID=0;
+        Double empPayRoll =0.0;
+        System.out.println(textFieldEmpPayRoll.getText());
+        labelSuccessSubmit.setText("WHATTHE");
+
+        try{
+            empID= Integer.parseInt(textFieldEmpID.getText());
+        }catch(NumberFormatException exception){
+            successful11=false;
+            labelSuccessSubmit.setText("Employee ID Input Error.");
+        }
+
+       Boolean successful12=true;
+        try{
+
+            empPayRoll =Double.parseDouble(textFieldEmpPayRoll.getText());
+        }catch (NullPointerException exception){
+            successful12=false;
+            labelSuccessSubmit.setText("Payroll Input Error.");
+        }
+        if (successful11== true && successful12 == true){
+            //correct inputs, allow sumbit
+            labelSuccessSubmit.setText("Employee added succesfully!");
+            data.add(new Employee(empName,empPayRoll,empID ));
+
+        }
+
+
+
+    }
+
+    @FXML void handleDeleteEmployee(){
+        data.remove(employeeClickedOn);
+        System.out.println(employeeClickedOn.getName()+"IS GONE");
+        employeeClickedOn= null;
+
+
+
+    }
+
+    @FXML
+    void handleAdd(){
+        System.out.println("add");
+        data.add(new Employee(
+            "Mark Jackson",
+            12.3,
+            6));
+       // Employee createemp = new Employee("Joe Jackson", "12.0","6");
+     //   employees.add(createemp);
+
+
+
+    }
 
 
 
@@ -157,9 +245,14 @@ public class ManagerMenuController implements Initializable {
             System.out.println(passwordList.get(i));
             i++;
         }
-        storeFields.storeVariables1(usernameList,passwordList,guestList,rooms);
+        storeFields.storeVariables1(usernameList,passwordList,guestList,rooms,data);
 
 
+        for (Employee e: data
+        ) {
+
+            System.out.println(e.getName());
+        }
         Parent p = Loader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(p));
@@ -170,17 +263,19 @@ public class ManagerMenuController implements Initializable {
     }
 
     ManagerMenuController(ArrayList<String> unLIST, ArrayList<String> pwList,
-        ArrayList<Guest> gList,List<Room> rooms){
+        ArrayList<Guest> gList,List<Room> rooms,ObservableList<Employee> data ){
+        System.out.println("herefirst?");
         /**
          * Happens after initialize class
          */
-        System.out.println("In Constructor");
+
         this.usernameList = unLIST;
         this.passwordList = pwList;
         this.guestList = gList;
         //this.currentGuest = g1;
         this.rooms = rooms;
-
+        this.data = data;
+        System.out.println("In Constructor");
 
     }
     /**
@@ -188,8 +283,94 @@ public class ManagerMenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        tabAddEmployee.setDisable(true);
         System.out.println("HERE IN INTAILIZE MANAGER");
+       // data =;
+        if (data.isEmpty()){
+            System.out.println("DATA EMPTY\n\n\n\n");
+            data =
+                FXCollections.observableArrayList(
+                    new Employee("Jacob", 12.3, 1),
+                    new Employee("Isabella", 13.8, 2),
+                    new Employee("Ethan", 12.8, 3),
+                    new Employee("Emma", 12.9, 4),
+                    new Employee("Michael", 15.0, 5)
+                );
+
+        }
+        System.out.println("INTY");
+//        buttonAdd.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override public void handle(ActionEvent e) {
+//                data.add(new Employee(
+//                    addFirstName.getText(),
+//                    addLastName.getText(),
+//                    addEmail.getText()
+//                ));
+//                addFirstName.clear();
+//                addLastName.clear();
+//                addEmail.clear();
+//            }
+//        });
+//        buttonAdd.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override public void handle(ActionEvent e) {
+//                data.add(new Employee(
+//                  "Mark Jackson",
+//                   "12.3",
+//                    "6"
+//                ));
+//            }
+//        });
+        //columnEmployeeID.setCellValueFactory(new PropertyValueFactory<Employee, String>("id"));
+        //columnNameEmployee.setCellValueFactory(new PropertyValueFactory<Employee, String>("name"));
+        //columnPayroll.setCellValueFactory(new PropertyValueFactory<Employee, String>("active"));
+        //TableColumn firstNameCol = new TableColumn("First Name");
+       // columnEmployeeID.setMinWidth(100);
+        columnNameEmployee.setCellValueFactory(
+            new PropertyValueFactory<Employee, String>("name"));
+
+        //TableColumn lastNameCol = new TableColumn("Last Name");
+      //  columnNameEmployee.setMinWidth(100);
+        columnPayroll.setCellValueFactory(
+            new PropertyValueFactory<Employee, Double>("payHourly"));
+
+        //TableColumn emailCol = new TableColumn("Email");
+        //columnPayroll.setMinWidth(200);
+        columnEmployeeID.setCellValueFactory(
+            new PropertyValueFactory<Employee, Integer>("employeeID"));
+
+        tableViewEmployees.setItems(data);
+       // tableViewEmployees.getColumns().addAll(columnEmployeeID, columnPayroll, columnEmployeeID);
+        // TODO
+           // tableViewEmployees.setOnMousePressed((MouseEvent event) );
+        tableViewEmployees.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                String employeeSelected = tableViewEmployees.getSelectionModel().getSelectedItem().toString();
+                //System.out.println("To string:"+roomSelected.toString());
+
+                for (Employee e: data
+                ) {
+                    if (e.toString().equalsIgnoreCase(employeeSelected)){
+                        employeeClickedOn= e;
+                        System.out.println("Room: "+employeeClickedOn.getName());
+                        //Same toString same, set currentRoom to r
+
+                    }
+                    // System.out.println(r.getName());
+                }
+                System.out.println("Here is : "+employeeClickedOn);
+                // System.out.println("clicked on " + roomListView.getSelectionModel().getSelectedItem());
+
+                //Check Room Avability.
+                //displayRoomFeatures(roomClickedOn);
+
+            }
+
+        });
+
+
+
 
         if (rooms.isEmpty())
         {
@@ -249,6 +430,9 @@ public class ManagerMenuController implements Initializable {
 
 
     }
+
+
+
 
     private void displayRoomFeatures(Room roomClickedOn) {
         if (roomClickedOn.getAvailable()){
@@ -322,10 +506,5 @@ public class ManagerMenuController implements Initializable {
 //                }
 
         }
-
-
-
-
-
 
 

@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -48,6 +49,7 @@ public class GuestMenuController implements Initializable {
   private Room roomClickedOn;
   private int daysStaying;
   private boolean initializedRooms=false;
+  private ObservableList<Employee> data;
 
   @FXML
   public void storeVariables(ArrayList<String> unLIST, ArrayList<String> pwList,
@@ -178,7 +180,7 @@ void tabClicked(Event ev) {
       //  DisplayTextController display = Loader.getController(); //Calling DisplayTextcontroller file
       // display.setText(name_Text,email_Text); //using displaytextcontroller's method
       FXMLDocumentController storeFields =Loader.getController();
-      storeFields.storeVariables1(usernameList,passwordList,guestList,rooms);
+      storeFields.storeVariables1(usernameList,passwordList,guestList,rooms,data);
 
 
       Parent p = Loader.getRoot();
@@ -192,7 +194,7 @@ void tabClicked(Event ev) {
     }
 
     GuestMenuController(ArrayList<String> unLIST, ArrayList<String> pwList,
-        ArrayList<Guest> gList, Guest g1,List<Room> rooms){
+        ArrayList<Guest> gList, Guest g1,List<Room> rooms,  ObservableList<Employee> data){
       /**
        * Happens after initialize class
        */
@@ -202,6 +204,7 @@ void tabClicked(Event ev) {
       this.guestList = gList;
       this.currentGuest = g1;
       this.rooms = rooms;
+      this.data = data;
 
 
     }

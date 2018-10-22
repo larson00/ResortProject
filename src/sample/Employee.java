@@ -1,88 +1,46 @@
 package sample;
 
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.util.Callback;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
-public class Employee {
-  String name,title;
-  double payHourly;
-  int id;
+public  class Employee {
+
+  private final SimpleStringProperty name;
+  private final SimpleDoubleProperty payHourly;
+  private final SimpleIntegerProperty employeeID;
+
+  Employee(String fName, double payme, Integer id) {
+    this.name = new SimpleStringProperty(fName);
+    this.payHourly = new SimpleDoubleProperty(payme);
+    this.employeeID = new SimpleIntegerProperty(id);
+  }
 
   public String getName() {
-
-    return name;
+    return name.get();
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setName(String fName) {
+    name.set(fName);
   }
 
-  public String getTitle() {
-    return title;
+  public Double getPayHourly() {
+    System.out.println("HERE");
+    //return "out";
+    return payHourly.get();
   }
 
-  public void setTitle(String title) {
-    this.title = title;
+  public void setPayHourly(Double payme) {
+    System.out.println("paymee");
+    payHourly.set(payme);
+
   }
 
-  public double getPayHourly() {
-    return payHourly;
+  public Integer getEmployeeID() {
+    return employeeID.get();
   }
 
-  public void setPayHourly(int payHourly) {
-    this.payHourly = payHourly;
+  public void setEmployeeID(Integer id) {
+    employeeID.set(id);
   }
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  public Employee(String name, double payHourly, int id) {
-    this.name = name;
-    //this.title = title;
-    this.payHourly = payHourly;
-    this.id = id;
-  }
-
-
-}
-
-class EmployeeCell  extends ListCell<Employee>
-{
-  @Override
-  public void updateItem(Employee item, boolean empty)
-  {
-    super.updateItem(item, empty);
-
-    int index = this.getIndex();
-    String name = null;
-
-    // Format name
-    if (item == null || empty)
-    {
-    }
-    else
-    {
-      name = (index + 1) + ". " +
-          item.getName() + ", ";
-    }
-
-    this.setText(name);
-    setGraphic(null);
-  }
-}
-
-
-class EmployeeCellFactory implements Callback<ListView<Employee>, ListCell<Employee>> {
-
-  @Override
-  public ListCell<Employee> call(ListView<Employee> listview) {
-    return new EmployeeCell();
-  }
-
 }
