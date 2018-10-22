@@ -14,7 +14,7 @@
    <children>
       <TabPane fx:id="tabPane" prefHeight="352.0" prefWidth="352.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="View Rooms">
+          <Tab fx:id="tabViewRoomTab" onSelectionChanged="#tabClicked" text="View Rooms">
             <content>
                   <AnchorPane prefHeight="292.0" prefWidth="325.0">
                      <children>

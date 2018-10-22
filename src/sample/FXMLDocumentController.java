@@ -62,6 +62,7 @@ public class FXMLDocumentController {
       i++;
     }
       for (Room r: rooms) {
+
         System.out.println("Room:" +r.getName()
             + " Price "+ r.getPrice()
             + " Avail: "+r.getAvailable()
@@ -92,6 +93,9 @@ public class FXMLDocumentController {
 //            e.printStackTrace();
 //        }
 
+      Stage stage = (Stage) buttonCreate.getScene().getWindow();
+            stage.close();
+
       GuestMenuController guestController = new GuestMenuController(usernameList,passwordList,guestList,g1,rooms);
       //guestController.storeVariables(usernameList,passwordList,guestList,g1,rooms);
       //FXMLLoader loader = new FXMLLoader();
@@ -115,7 +119,8 @@ public class FXMLDocumentController {
       //
 
       Parent p = Loader.getRoot();
-      Stage stage = new Stage();
+       stage = new Stage();
+      stage.setTitle("Guest Menu: "+g1.getUserName());
       stage.setScene(new Scene(p));
       stage.show();
 
@@ -312,42 +317,60 @@ public class FXMLDocumentController {
     }
 
   private void openManagerMenu() {
-//  //  ManagerMenuController guestController = new ManagerMenuController(
-//    //    usernameList,passwordList,guestList,rooms
-//    //);
-//    //guestController.storeVariables(usernameList,passwordList,guestList,g1,rooms);
-//    //FXMLLoader loader = new FXMLLoader();
-//
-//
-////  FXMLLoader Loader = new FXMLLoader();
-// // Loader.setLocation(getClass().getResource("ManagerMenuController.fxml")); //Call new window
+  //  ManagerMenuController guestController = new ManagerMenuController(
+    //    usernameList,passwordList,guestList,rooms
+    //);
+    //guestController.storeVariables(usernameList,passwordList,guestList,g1,rooms);
+    //FXMLLoader loader = new FXMLLoader();
+
+
+//  FXMLLoader Loader = new FXMLLoader();
+ // Loader.setLocation(getClass().getResource("ManagerMenuController.fxml")); //Call new window
+   // try {
+    //  Loader.setController(guestController);
+     // Loader.load(); //Loads
+    //}catch ( IOException ex){
+     // Logger.getLogger(GuestMenuController.class.getName()).log(Level.SEVERE, null ,ex);
+
+    //}
+//      DisplayTextController display = Loader.getController(); //Calling DisplayTextcontroller file
+//     display.setText(name_Text,email_Text); //using displaytextcontroller's method
+//      GuestMenuController storeFields =Loader.getController(); //Calling the new window's  controller
+//     storeFields.storeVariables(usernameList,passwordList,guestList,g1,rooms); //Calling the controller's method
+//    Store Variables will store the lists of users, passwords and guest
+//    GuestMenu's store Variables also takes the guest selected by user.
+
+
+
+    ManagerMenuController guestController = new ManagerMenuController(usernameList,passwordList,guestList,rooms);
+    Stage stageExit = (Stage) buttonExit1.getScene().getWindow();
+    stageExit.close();
+    FXMLLoader Loader = new FXMLLoader();
+    Loader.setLocation(getClass().getResource("ManagerMenu.fxml")); //Call new window
+    try {
+      Loader.setController(guestController);
+      Loader.load(); //Loads
+    }catch ( IOException ex){
+      Logger.getLogger(ManagerMenuController.class.getName()).log(Level.SEVERE, null ,ex);
+
+    }
+
+
+//    FXMLLoader Loader = new FXMLLoader();
+//    Loader.setLocation(getClass().getResource("ManagerMenu.fxml"));
 //    try {
-//    //  Loader.setController(guestController);
-//      Loader.load(); //Loads
+//      Loader.load();
 //    }catch ( IOException ex){
 //      Logger.getLogger(GuestMenuController.class.getName()).log(Level.SEVERE, null ,ex);
 //
 //    }
-//    //  DisplayTextController display = Loader.getController(); //Calling DisplayTextcontroller file
-//    // display.setText(name_Text,email_Text); //using displaytextcontroller's method
-//    //  GuestMenuController storeFields =Loader.getController(); //Calling the new window's  controller
-//    // storeFields.storeVariables(usernameList,passwordList,guestList,g1,rooms); //Calling the controller's method
-//    //Store Variables will store the lists of users, passwords and guest
-//    //GuestMenu's store Variables also takes the guest selected by user.
-//    //
-    //Stage stageExit = (Stage) buttonExit1.getScene().getWindow();
-    //stageExit.close();
-    FXMLLoader Loader = new FXMLLoader();
-    Loader.setLocation(getClass().getResource("ManagerMenu.fxml"));
-    try {
-      Loader.load();
-    }catch ( IOException ex){
-      Logger.getLogger(GuestMenuController.class.getName()).log(Level.SEVERE, null ,ex);
-
-    }
-
+//    ManagerMenuController storeFields =Loader.getController(); //Calling the new window's  controller
+// storeFields.storeVariables2(usernameList,passwordList,guestList,rooms); //Calling the controller's method
+    //Dont' do these two lines again. What happens first is Controller's intilize with makez default 3 rooms.
+    //And then it gets set with the empty room the second send it cassing error. We have a better way doing this.
     Parent p = Loader.getRoot();
     Stage stage = new Stage();
+    stage.setTitle("Manager Menu");
     stage.setScene(new Scene(p));
     stage.show();
   }

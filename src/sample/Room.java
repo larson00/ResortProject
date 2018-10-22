@@ -12,6 +12,22 @@ public class Room {
   boolean isAvailable;
   double price;
   Guest occupiedGuest;
+  int daysStaying;
+
+  public void removeGuest(){
+    occupiedGuest = null;
+    daysStaying = 0;
+    isAvailable= true;
+
+  }
+
+  public int getDaysStaying() {
+    return daysStaying;
+  }
+
+  public void setDaysStaying(int daysStaying) {
+    this.daysStaying = daysStaying;
+  }
 
   public Guest getOccupiedGuest() {
     return occupiedGuest;

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="346.0" prefWidth="347.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ManagerMenuController">
+<AnchorPane id="AnchorPane" prefHeight="346.0" prefWidth="347.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane prefHeight="349.0" prefWidth="347.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -50,22 +50,23 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="View Rooms">
+          <Tab fx:id="tabViewRooms" text="View Rooms">
             <content>
               <AnchorPane prefHeight="292.0" prefWidth="325.0">
                 <children>
                   <ListView fx:id="roomListView" layoutX="32.0" layoutY="58.0" prefHeight="188.0" prefWidth="125.0" />
                   <Text layoutX="76.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rooms" />
-                  <Text layoutX="216.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Preview" />
+                  <Text layoutX="217.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Preview" />
                   <ImageView fx:id="imageViewRoom" fitHeight="133.0" fitWidth="149.0" layoutX="179.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
                   <Text layoutX="183.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Price:" />
                   <Text layoutX="181.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Days Staying:" />
                   <Label fx:id="labelPricePerDay" layoutX="255.0" layoutY="183.0" text="Price Per Day" />
-                  <Button fx:id="signoutButton" layoutX="263.0" layoutY="267.0" mnemonicParsing="false" onAction="#handleSignout" text="Signout" />
+                  <Button fx:id="signoutButton" layoutX="274.0" layoutY="267.0" mnemonicParsing="false" onAction="#handleSignout" text="Signout" />
                   <Label fx:id="labelAvailable" layoutX="48.0" layoutY="271.0" text="Occupied?" />
-                        <Label layoutX="183.0" layoutY="152.0" text="Guest Nane:" />
+                        <Label layoutX="183.0" layoutY="152.0" text="Guest Name:" />
                         <Label fx:id="labelGuestName" layoutX="258.0" layoutY="152.0" text="Guest" />
                         <Label fx:id="labelDaysStaying" layoutX="260.0" layoutY="217.0" text="Label" />
+                        <Button fx:id="buttonRemoveGuest" layoutX="151.0" layoutY="267.0" mnemonicParsing="false" onAction="#handleRemoveGuest" text="Remove Guest" />
                 </children>
               </AnchorPane>
             </content>

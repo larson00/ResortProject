@@ -24,7 +24,7 @@ public class Main extends Application {
 
 
         Scene scene = new Scene(root);
-
+        stage.setTitle("Login Page");
         stage.setScene(scene);
         stage.show();
     }

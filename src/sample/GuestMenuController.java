@@ -16,6 +16,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -94,6 +95,8 @@ private Tab tabPayment;
 
 @FXML
 private ListView roomListView;
+@FXML
+private Tab tabViewRoomTab;
 
 
 
@@ -116,9 +119,11 @@ private ListView roomListView;
         success= false;
       }
       if (success==true){
+        tabPayment.setDisable(false);
         buttonConfirmPayment.setDisable(false);
         System.out.println("here");
         labelTotalPriceShow.setText(Double.toString(roomClickedOn.getPrice() * daysStaying));
+        
       }
 
 
@@ -126,7 +131,26 @@ private ListView roomListView;
 
 
   }
+@FXML
+void tabClicked(Event ev) {
+  if (tabViewRoomTab.isSelected()) {
+//    buttonConfirmPayment.setDisable(true);
+    System.out.println("TABLCICK");
+    try{
+      tabPayment.setDisable(true);
+    }catch (NullPointerException exception){
 
+    }
+    try{
+      displayRoomFeatures(roomClickedOn);
+    }catch (NullPointerException exception){
+
+    }
+
+
+
+  }
+}
 
     @FXML
     public void handleSignout(ActionEvent event){
@@ -159,6 +183,7 @@ private ListView roomListView;
 
       Parent p = Loader.getRoot();
       Stage stage = new Stage();
+      stage.setTitle("Login Menu");
       stage.setScene(new Scene(p));
       stage.show();
 
@@ -201,7 +226,7 @@ private ListView roomListView;
         rooms.get(2).setOccupiedGuest(new Guest("ClarkKent","superman"));//John Doe occupies room 1A
       }
 
-
+      tabPayment.setDisable(true);
       roomListView.itemsProperty().bind(listProperty);
 
       listProperty.set(FXCollections.observableArrayList(rooms));
@@ -234,7 +259,7 @@ private ListView roomListView;
       });
 
     }
-
+@FXML
   private void displayRoomFeatures(Room roomClickedOn) {
       if (roomClickedOn.getAvailable()){
         //true
@@ -260,5 +285,11 @@ private ListView roomListView;
     System.out.println("Room:"+roomClickedOn.getName() +" Availe:"+roomClickedOn.getAvailable() + " guest: "+
         roomClickedOn.getOccupiedGuest().getUserName());
 
+    Stage currentStage = (Stage) signoutButton.getScene().getWindow();
+    currentStage.setTitle("Guest Login: "+currentGuest.getUserName()+" - "+roomClickedOn.getName() );
+
+
+    
   }
+
 }
