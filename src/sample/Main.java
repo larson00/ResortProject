@@ -13,7 +13,11 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author ggrab
+ * @author ggrab, pPetit
+ * Reosrt Project Main.java
+ * This project will allow guests to book rooms, and Managers to manage employees and rooms
+ * This main file opens the FXMLDocumentController
+ *
  */
 public class Main extends Application {
 

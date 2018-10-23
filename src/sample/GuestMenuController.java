@@ -47,6 +47,22 @@ import javafx.stage.Stage;
 
 /**
  * FXML Controller class
+ *Notes:ppEtit
+ *GuestMenuController.java
+ *
+ * This controller controls the GuestMenu.fxml
+ * This allows the gues to:
+ * View Room List.
+ * Book Room.
+ *
+ * User can click through list of rooms, the window will update the information  about the room.
+ * What updates are: Image(Not yet), Availability, price per room.
+ * If room is available, then user can enter daysStaying and book room
+ *
+ * Otherwise the Guest can logout, and their information is saved.
+ *
+ * The program is coded so it know what room is selected when booking room.
+ * All room information can be seen in Manager Window.
  *
  * @author ggraber7402
  */
@@ -60,7 +76,7 @@ public class GuestMenuController implements Initializable {
   private boolean initializedRooms=false;
   private ObservableList<Employee> data;
 
-
+//No Longer used anymore
   @FXML
   public void storeVariables(ArrayList<String> unLIST, ArrayList<String> pwList,
       ArrayList<Guest> gList, Guest g1,List<Room> rooms){
@@ -121,20 +137,27 @@ private Tab tabViewRoomTab;
 
     @FXML
     public void handleBookRoom(ActionEvent event){
+      /**
+       * Called by BookRoom Button
+       * Checks if user inputted DaysStayed textbox
+       * if the input is invalid the Payment button is disabled and user has to go back
+       * otherwise, it will allow user to book room.
+       *
+       */
       Boolean success= true;
-      tabPane.getSelectionModel().select(tabPayment);
+      tabPane.getSelectionModel().select(tabPayment); //Opens tabPayment tab.
       try{
-        daysStaying =Integer.parseInt(textFieldDaysStaying.getText());
-      }catch (NumberFormatException exception){
+        daysStaying =Integer.parseInt(textFieldDaysStaying.getText()); //Check if valid
+      }catch (NumberFormatException exception){ //Cannot create a Integer from the input, user needs to try again
         labelTotalPriceShow.setText("Error, Invalid Input");
-        buttonConfirmPayment.setDisable(true);
+        buttonConfirmPayment.setDisable(true);//Disables Confirm Payment Button
         success= false;
       }
-      if (success==true){
+      if (success==true){ //Valid Input, run this
         tabPayment.setDisable(false);
-        buttonConfirmPayment.setDisable(false);
+        buttonConfirmPayment.setDisable(false); //Enables Confirm Payment Button
         System.out.println("here");
-        labelTotalPriceShow.setText(Double.toString(roomClickedOn.getPrice() * daysStaying));
+        labelTotalPriceShow.setText(Double.toString(roomClickedOn.getPrice() * daysStaying)); //total PRice
         
       }
 
@@ -145,10 +168,13 @@ private Tab tabViewRoomTab;
   }
 @FXML
 void tabClicked(Event ev) {
+  /**
+   * Checks if tab is clicked
+   */
   if (tabViewRoomTab.isSelected()) {
 //    buttonConfirmPayment.setDisable(true);
     //System.out.println("TABLCICK");
-    try{
+    try{ //if ViewRoomTab is clicked, then tabPayment is disabled
       tabPayment.setDisable(true);
     }catch (NullPointerException exception){
 
@@ -177,10 +203,18 @@ void tabClicked(Event ev) {
 //        } catch(Exception e) {
 //            e.printStackTrace();
 //        }
+      /**
+       * Opening the FXMLDOCUMENT CONTROLLER is slighty different than opening other controllers
+       * The controller is called after the fxml is loaded.
+       * The data is stored via the storeVariables method.
+       * It just works, dont ask me.
+       */
+
+
       Stage stageExit = (Stage) signoutButton.getScene().getWindow();
-            stageExit.close();
+            stageExit.close(); //close current window
       FXMLLoader Loader = new FXMLLoader();
-      Loader.setLocation(getClass().getResource("FXMLDocument.fxml"));
+      Loader.setLocation(getClass().getResource("FXMLDocument.fxml")); //get FXML path
       try {
         Loader.load();
       }catch ( IOException ex){
@@ -190,14 +224,14 @@ void tabClicked(Event ev) {
       //  DisplayTextController display = Loader.getController(); //Calling DisplayTextcontroller file
       // display.setText(name_Text,email_Text); //using displaytextcontroller's method
       FXMLDocumentController storeFields =Loader.getController();
-      storeFields.storeVariables1(usernameList,passwordList,guestList,rooms,data);
+      storeFields.storeVariables1(usernameList,passwordList,guestList,rooms,data); //This method will stoer the variables
 
 
       Parent p = Loader.getRoot();
       Stage stage = new Stage();
-      stage.setTitle("Login Menu");
+      stage.setTitle("Login Menu"); //set title
       stage.setScene(new Scene(p));
-      stage.show();
+      stage.show();//Open new window
 
 
 
@@ -206,9 +240,11 @@ void tabClicked(Event ev) {
     GuestMenuController(ArrayList<String> unLIST, ArrayList<String> pwList,
         ArrayList<Guest> gList, Guest g1,List<Room> rooms,  ObservableList<Employee> data){
       /**
-       * Happens after initialize class
+       * Happens before initalize class, this this program atleast.
+       * In others it's the oppopsite
+       * This stores the variables from other controllers so it all matches.
        */
-      System.out.println("In Constructor");
+      //System.out.println("In Constructor");
       this.usernameList = unLIST;
       this.passwordList = pwList;
       this.guestList = gList;
@@ -224,10 +260,19 @@ void tabClicked(Event ev) {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+      /**
+       * Starts after constructor in this program
+       * This starts before the window is shown
+       * It will create a default rooms, if it hasnt' been created yet
+       * It also gives the ListView it's mouseClick listener
+       *
+       *
+       */
       System.out.println("HERE IN INTAILIZE");
 
       if (rooms.isEmpty())
       {
+        //Make Default room list
         //System.out.println("ROOM OS EMPTY \n\n\n");
         rooms.add(new Room("Room 1A",false,200));
         rooms.get(0).setAvailable(false);
@@ -239,22 +284,39 @@ void tabClicked(Event ev) {
         rooms.get(2).setOccupiedGuest(new Guest("ClarkKent","superman"));//John Doe occupies room 1A
       }
 
+      /**
+       * To make a arraylist exist in ListPane first you
+       * Create Arraylist
+       * Create a ItemProperty
+       * Then you bind the arraylist to the Listpane via the item Properrty
+       */
       tabPayment.setDisable(true);
       roomListView.itemsProperty().bind(listProperty);
 
       listProperty.set(FXCollections.observableArrayList(rooms));
-      roomListView.setCellFactory(new RoomCellFactory());
+      roomListView.setCellFactory(new RoomCellFactory()); //Cell Factory allows formatting
       roomListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
+        /**
+         * Allows us to know what item of the listView is being seleceted
+         * this also called a method to update the window is the new informoation
+         *
+         * @param event
+         */
         @Override
         public void handle(MouseEvent event) {
+          /**
+           * We can only call the Object, not the class
+           * So by comparing toString()'s we know if it matches, then it's the same Object
+           */
           String roomSelected = roomListView.getSelectionModel().getSelectedItem().toString();
           //System.out.println("To string:"+roomSelected.toString());
+
 
           for (Room r: rooms
           ) {
             if (r.toString().equalsIgnoreCase(roomSelected)){
-              roomClickedOn= r;
+              roomClickedOn= r; //Same ToString so we can set the object to it.
               System.out.println("Room: "+roomClickedOn.getName());
               //Same toString same, set currentRoom to r
 
@@ -265,6 +327,9 @@ void tabClicked(Event ev) {
          // System.out.println("clicked on " + roomListView.getSelectionModel().getSelectedItem());
 
           //Check Room Avability.
+          /**
+           * Call displayRoomFeatures to update Window
+           */
           displayRoomFeatures(roomClickedOn);
 
         }
@@ -274,6 +339,10 @@ void tabClicked(Event ev) {
     }
 @FXML
   private void displayRoomFeatures(Room roomClickedOn) {
+      /**
+       * This method will update the window with information about Room
+       * The program know and send the current Room clicked on
+       */
       if (roomClickedOn.getAvailable()){
         //true
         labelAvailable.setText("Available");
@@ -302,6 +371,9 @@ void tabClicked(Event ev) {
 }
 
   public void handleConfirmPayment(ActionEvent event) {
+    /**
+     * This method adds Guest to Room
+     */
     labelPaymentSuccess.setText("Payment Success");
     roomClickedOn.setAvailable(false);
     roomClickedOn.setOccupiedGuest(currentGuest);

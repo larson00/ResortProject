@@ -49,6 +49,26 @@ import javafx.util.Callback;
 /**
  * FXML Controller class
  *
+ * ManagerMenuConroller.java
+ * Notes by: pPetit
+ *
+ * Manager Window Probably Most Important
+ * Manager Can:
+ * View Employees
+ * Add Employees/Delete Emplyee
+ * View Rooms
+ * Remove People from rooms.
+ *
+ * With View Employees:
+ * Employees are a class of Employee class and are displayed in Table View.
+ * Manager can select an Employee and delete them
+ * Mananger can select Add Button,and be taken to tabAddEmployee
+ * As long as the fields are correct an employee can be successfully Added.
+ *
+ * View Rooms:
+ * Almost indentical to Guest's
+ * Manager can also delete Guest from Room.
+ *
  * @author ggraber7402
  */
 
@@ -64,7 +84,7 @@ public class ManagerMenuController implements Initializable {
     private boolean initializedRooms=false;
     @FXML
     private TableView<Employee> employeeTable = new TableView<Employee>();
-    private ObservableList<Employee> data;
+    private ObservableList<Employee> data; //This is where emplyees are stored
     final HBox hb = new HBox();
 
     @FXML

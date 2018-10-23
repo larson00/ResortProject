@@ -33,8 +33,21 @@ import javafx.stage.Stage;
 
 /**
  * Notes
- * Chck the text file of fxml files, they will sometimes have redtext/eerors which intellj will not tell you
- * MAke sure there no java.awt wiwll cause errors
+ * Chck the text file of fxml files, they will sometimes have redtext/eerors which IDEA IDE will not tell you
+ * Make sure there no java.awt as it will case Errors
+ *
+ *
+ * FXMLDocumentController.java
+ * Notes by:pPetit
+ * This is bascially the "main" of the project.
+ * This houses the login screen: Guest Login and Maanager Login
+ * To login to guest, you  have to enter a Username and Password and press Create Button
+ * That will invoke a method that creates a guest class, with the inputs the user did
+ * Then Guest can login, Usernames arent case senesitves but passwords are
+ *
+ * For Manager: The default Login in U: Nicolo P: Martina
+ * Same case sentivity,
+ * For extra functionality, you can show/hide passwords.
  *
  */
 
@@ -45,35 +58,40 @@ import javafx.stage.Stage;
  */
 
 public class FXMLDocumentController implements Initializable {
-    private ArrayList<String> usernameList = new ArrayList<>();
-    private ArrayList<String> passwordList = new ArrayList<>();
-    private ArrayList<Guest> guestList = new ArrayList<>();
-    private List<Room> rooms = new ArrayList<>();
-    private Guest currentGuest;
-  private  ObservableList<Employee> data= FXCollections.observableArrayList();
-    private Manager admin;
+    private ArrayList<String> usernameList = new ArrayList<>(); //ArrayList of username Fields
+    private ArrayList<String> passwordList = new ArrayList<>();//Array:ist of password Field
+    private ArrayList<Guest> guestList = new ArrayList<>();//Arraylist of Guests
+    private List<Room> rooms = new ArrayList<>();//Arraylist of rooms that Manager/Guest Menu's use
+    private Guest currentGuest; //FXMLDocumentController keeps track of guest to send to GuestMenu
+  private  ObservableList<Employee> data= FXCollections.observableArrayList(); // Arraylist of Employees for MaanagerMenu
+    private Manager admin;//Not used
 
 
 
-  enum UserType{
+  enum UserType{ //not used
         GUEST,MANAGER
 
     }
 
 @FXML
-private CheckBox checkBox;
+private CheckBox checkBox; //CheckBo for handling showPassword
 
     @FXML
   public void storeVariables1(ArrayList<String> unLIST, ArrayList<String> pwList,
       ArrayList<Guest> gList,List<Room> rooms,ObservableList<Employee> data){
-      //To send and store varaibles across windows.
+      /**
+       * To send and store variables across windows.
+       * Other Controllers will call this method and send their lists, so the whole programs are sharing
+       * the same data.
+       */
+      //
     this.usernameList = unLIST;
     this.passwordList = pwList;
     this.guestList = gList;
     this.rooms = rooms;
     this.data = data;
     int i=0;
-    for (String word :usernameList){
+    for (String word :usernameList){ //Show UserList to check if correct data is stored
       System.out.println("Name = " + word);
       System.out.println(passwordList.get(i));
       i++;
@@ -109,15 +127,23 @@ private CheckBox checkBox;
 //        } catch(Exception e) {
 //            e.printStackTrace();
 //        }
+      /**
+       * Simple Process
+       * First Close the Window
+       * Create A object of the new Controller Class
+       * store Data,arraylists in that controllerclass's constructor
+       * Then Open the fxml File
+       * When the new window is opened the data is stored.
+       *
+       */
+      Stage stage = (Stage) buttonCreate.getScene().getWindow(); //Asks a object in the window to store it's WindowID
+            stage.close(); //Close current Window
 
-      Stage stage = (Stage) buttonCreate.getScene().getWindow();
-            stage.close();
-
+      //Make Object of Controller so we can use it's constructor to pass Variables
       GuestMenuController guestController = new GuestMenuController(usernameList,passwordList,guestList,g1,rooms,data);
-      //guestController.storeVariables(usernameList,passwordList,guestList,g1,rooms);
-      //FXMLLoader loader = new FXMLLoader();
 
 
+    //Loads FXML Loader
       FXMLLoader Loader = new FXMLLoader();
       Loader.setLocation(getClass().getResource("GuestMenu.fxml")); //Call new window
       try {
@@ -139,7 +165,7 @@ private CheckBox checkBox;
        stage = new Stage();
       stage.setTitle("Guest Menu: "+g1.getUserName());
       stage.setScene(new Scene(p));
-      stage.show();
+      stage.show(); //Opens new Window
 
 
 
@@ -149,6 +175,13 @@ private CheckBox checkBox;
 
     void checkLogin(String usernameSent, String passwordSent)
     {
+      /**
+       * Login Button calls this method
+       * This will check if the user inputted username and password match one  of the arraylist Record
+       * Will give back different errors in the console
+       * If successful than a guest is chosen and that Guest will be altered in the GuestMenu Window
+       *
+       */
         // usernameSent= usernameSent.toLowerCase();
         //passwordSent= passwordSent.toLowerCase();
         boolean isNameCorrect=false;
@@ -161,10 +194,11 @@ private CheckBox checkBox;
                 //now check password
                 if (g1.getPassword().equals(passwordSent)){
                     try {
-                        openGuestMenu(g1);
+                        openGuestMenu(g1); //Open Guest Menu, send g1
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    //Successful!
                     System.out.println("Login Succesful");
                     isPasswordCorrect= true;
                 }
@@ -211,7 +245,7 @@ private CheckBox checkBox;
     }
 
     public void createGuest(String n, String pw){
-        Guest createGuest = new Guest(n,pw);
+        Guest createGuest = new Guest(n,pw); //Calls method to create new Guest option nothing special
 
         getUsernameList().add(n);// No need for method this already adds it in
         getPasswordList().add(pw);
@@ -272,12 +306,15 @@ private CheckBox checkBox;
 
     @FXML
     void extraFunction(ActionEvent event){
-        System.out.println("BLAH");
+        //System.out.println("BLAH"); Cant remember what this is for
 
     }
 
     @FXML
     void handleButtonExit(ActionEvent event) {
+      /**
+       * Exit Program, closes window
+       */
         System.out.println("Goodbye");
       Stage stageExit = (Stage) buttonExit.getScene().getWindow();
       stageExit.close();
@@ -286,11 +323,11 @@ private CheckBox checkBox;
     @FXML
     void handleButtonLogin(ActionEvent event) {
 
-        String field1, field2;
-        field1 = txtfieldUsername.getText();
-        field2 = textFieldPassword.getText();
-        UserType tyoe= UserType.GUEST;
-        checkLogin(field1,field2);
+        String field1, field2;//Declare Strings
+        field1 = txtfieldUsername.getText();//Store what in txtField Username into field1
+        field2 = textFieldPassword.getText();//Store whats in txtFieldPassword into field2
+        //UserType tyoe= UserType.GUEST; Not used
+        checkLogin(field1,field2);//Calls method to check if inputs are valid
 
 
 
@@ -304,6 +341,7 @@ private CheckBox checkBox;
 
     @FXML
     void handleButtonLoginManager(ActionEvent event){
+      //see HandleButtonLogin for guests, basically same code
         System.out.println("MAngaer");
         boolean isNameCorrect=false;
         boolean isPasswordCorrect=false;
@@ -359,7 +397,10 @@ private CheckBox checkBox;
 //     storeFields.storeVariables(usernameList,passwordList,guestList,g1,rooms); //Calling the controller's method
 //    Store Variables will store the lists of users, passwords and guest
 //    GuestMenu's store Variables also takes the guest selected by user.
-
+/**
+ * See Guest Controller open for Notes, since it's basically the same
+ *
+ */
 
 
     ManagerMenuController managerController = new ManagerMenuController(usernameList,passwordList,guestList,rooms,data);
@@ -393,7 +434,7 @@ private CheckBox checkBox;
     Stage stage = new Stage();
     stage.setTitle("Manager Menu");
     stage.setScene(new Scene(p));
-    stage.show();
+    stage.show(); //Opens
   }
   @FXML
   CheckBox checkBox2;
@@ -402,6 +443,11 @@ private CheckBox checkBox;
     @FXML TextField textFieldForPasswordManager;
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    /**
+     * This method is called first when FXMLDOCUEMENTCONTROLLER IS opened.
+     * It will set the properties for passwordFields to able to show/hide
+     * Nothing else happens
+     */
     // text field to show password as unmasked
     //final TextField textFieldForPassword = new TextField(); //REgular textfield show characters
     //System.out.println(textFieldPassword.getLayoutY());
@@ -410,7 +456,7 @@ private CheckBox checkBox;
    // textFieldForPassword.setLayoutX(textFieldPassword.getLayoutX());
     // Set initial state
     textFieldForPassword.setManaged(false);
-    textFieldForPassword.setVisible(false);//Hide regular textfiel
+    textFieldForPassword.setVisible(false);//Hide regular textfield
 
     textFieldForPasswordManager.setManaged(false);
     textFieldForPasswordManager.setVisible(false);//Hide regular textfield
@@ -447,8 +493,6 @@ private CheckBox checkBox;
 
   @FXML
     void handleButtonCreate(ActionEvent event){
-    System.out.println(textFieldForPassword.getLayoutX());
-    System.out.println(textFieldForPassword.getLayoutY());
 
         String field1, field2;
         field1 = txtfieldUsername.getText();
