@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package sample;
-
+import  javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,10 +31,19 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.swing.Action;
-import javax.swing.text.html.ImageView;
+import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+
 
 /**
  * FXML Controller class
@@ -50,6 +59,7 @@ public class GuestMenuController implements Initializable {
   private int daysStaying;
   private boolean initializedRooms=false;
   private ObservableList<Employee> data;
+
 
   @FXML
   public void storeVariables(ArrayList<String> unLIST, ArrayList<String> pwList,
@@ -86,8 +96,8 @@ private Tab tabPayment;
   private Label labelPricePerDay;
   @FXML
   private TextField textFieldDaysStaying;
-//  @FXML
-//  private ImageView imageViewRoom;
+  @FXML
+  private ImageView imageViewRoom;
 
 
     @FXML
@@ -137,7 +147,7 @@ private Tab tabViewRoomTab;
 void tabClicked(Event ev) {
   if (tabViewRoomTab.isSelected()) {
 //    buttonConfirmPayment.setDisable(true);
-    System.out.println("TABLCICK");
+    //System.out.println("TABLCICK");
     try{
       tabPayment.setDisable(true);
     }catch (NullPointerException exception){
@@ -218,8 +228,8 @@ void tabClicked(Event ev) {
 
       if (rooms.isEmpty())
       {
-        System.out.println("ROOM OS EMPTY \n\n\n");
-        rooms.add(new Room("1A",false,200));
+        //System.out.println("ROOM OS EMPTY \n\n\n");
+        rooms.add(new Room("Room 1A",false,200));
         rooms.get(0).setAvailable(false);
         rooms.get(0).setOccupiedGuest(new Guest("BruceWayne","batman"));//John Doe occupies room 1A
         rooms.add(new Room("Room 2A",true,300));
@@ -276,10 +286,20 @@ void tabClicked(Event ev) {
 
       }
       labelPricePerDay.setText(Double.toString(roomClickedOn.getPrice()));
+ // Image image = new Image("@Room1A.jpg");
+  //Image image = new Image(new File("za.png").toURI().toString());
+  //imageViewRoom.setImage(image);
+//  ImageView iv2 = new ImageView();
+//  iv2.setImage(image);
+//  iv2.setFitWidth(100);
+//  iv2.setPreserveRatio(true);
+//  iv2.setSmooth(true);
+//  iv2.setCache(true);
 
 
 
-  }
+
+}
 
   public void handleConfirmPayment(ActionEvent event) {
     labelPaymentSuccess.setText("Payment Success");
@@ -290,6 +310,7 @@ void tabClicked(Event ev) {
 
     Stage currentStage = (Stage) signoutButton.getScene().getWindow();
     currentStage.setTitle("Guest Login: "+currentGuest.getUserName()+" - "+roomClickedOn.getName() );
+    roomClickedOn.setDaysStaying(daysStaying);
 
 
     

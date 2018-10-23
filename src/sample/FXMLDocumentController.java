@@ -9,8 +9,10 @@ import com.sun.javafx.scene.control.behavior.PasswordFieldBehavior;
 import com.sun.javafx.scene.control.skin.TextFieldSkin;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -18,9 +20,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
@@ -40,7 +44,7 @@ import javafx.stage.Stage;
  * @author ggrab
  */
 
-public class FXMLDocumentController {
+public class FXMLDocumentController implements Initializable {
     private ArrayList<String> usernameList = new ArrayList<>();
     private ArrayList<String> passwordList = new ArrayList<>();
     private ArrayList<Guest> guestList = new ArrayList<>();
@@ -48,10 +52,17 @@ public class FXMLDocumentController {
     private Guest currentGuest;
   private  ObservableList<Employee> data= FXCollections.observableArrayList();
     private Manager admin;
-    enum UserType{
+
+
+
+  enum UserType{
         GUEST,MANAGER
 
     }
+
+@FXML
+private CheckBox checkBox;
+
     @FXML
   public void storeVariables1(ArrayList<String> unLIST, ArrayList<String> pwList,
       ArrayList<Guest> gList,List<Room> rooms,ObservableList<Employee> data){
@@ -256,6 +267,9 @@ public class FXMLDocumentController {
     @FXML
     private Label labelManagerLogin;
 
+
+
+
     @FXML
     void extraFunction(ActionEvent event){
         System.out.println("BLAH");
@@ -381,10 +395,60 @@ public class FXMLDocumentController {
     stage.setScene(new Scene(p));
     stage.show();
   }
+  @FXML
+  CheckBox checkBox2;
+  @FXML
+  TextField textFieldForPassword;
+    @FXML TextField textFieldForPasswordManager;
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    // text field to show password as unmasked
+    //final TextField textFieldForPassword = new TextField(); //REgular textfield show characters
+    //System.out.println(textFieldPassword.getLayoutY());
+    //System.out.println(textFieldPassword.getLayoutX());
+   // textFieldForPassword.setLayoutY(textFieldPassword.getLayoutY());
+   // textFieldForPassword.setLayoutX(textFieldPassword.getLayoutX());
+    // Set initial state
+    textFieldForPassword.setManaged(false);
+    textFieldForPassword.setVisible(false);//Hide regular textfiel
+
+    textFieldForPasswordManager.setManaged(false);
+    textFieldForPasswordManager.setVisible(false);//Hide regular textfield
+    textFieldForPasswordManager.managedProperty().bind(checkBox2.selectedProperty());// TextField's setManageProperty will be changed by CheckBox
+    textFieldForPasswordManager.visibleProperty().bind(checkBox2.selectedProperty());// TextField's setVisibleProperty will be changed by CheckBox
+
+    getTxtfieldPasswordManager.managedProperty().bind(checkBox2.selectedProperty().not());//Same as above but oppsite?
+    getTxtfieldPasswordManager.visibleProperty().bind(checkBox2.selectedProperty().not());
+
+    // Bind the textField and passwordField text values bidirectionally.
+    textFieldForPasswordManager.textProperty().bindBidirectional(getTxtfieldPasswordManager.textProperty()); //MAkes two textfie
+
+    // Actual password field
+    //final PasswordField passwordField = new PasswordField();//Password Field shows ***
+
+    // CheckBox checkBox = new CheckBox("Show/Hide password");//Create checkbox that will toggle
+
+    // Bind properties. Toggle textField and passwordField
+    // visibility and managability properties mutually when checkbox's state is changed.
+    // Because we want to display only one component (textField or passwordField)
+    // on the scene at a time.
+    textFieldForPassword.managedProperty().bind(checkBox.selectedProperty());// TextField's setManageProperty will be changed by CheckBox
+    textFieldForPassword.visibleProperty().bind(checkBox.selectedProperty());// TextField's setVisibleProperty will be changed by CheckBox
+
+    textFieldPassword.managedProperty().bind(checkBox.selectedProperty().not());//Same as above but oppsite?
+    textFieldPassword.visibleProperty().bind(checkBox.selectedProperty().not());
+
+    // Bind the textField and passwordField text values bidirectionally.
+    textFieldForPassword.textProperty().bindBidirectional(textFieldPassword.textProperty()); //MAkes two textfields share share same input
+    //If this code isn't there the two textfields are seperate
+
+  }
 
 
   @FXML
     void handleButtonCreate(ActionEvent event){
+    System.out.println(textFieldForPassword.getLayoutX());
+    System.out.println(textFieldForPassword.getLayoutY());
 
         String field1, field2;
         field1 = txtfieldUsername.getText();

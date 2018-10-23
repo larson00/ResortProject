@@ -21,9 +21,10 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="215.0" prefWidth="200.0">
                      <children>
+                        <TextField id="UserTextField" fx:id="txtfieldUsername" layoutX="103.0" layoutY="110.0" prefHeight="25.0" prefWidth="174.0" />
+                        <PasswordField fx:id="textFieldPassword" layoutX="103.0" layoutY="144.0" />
                           <Button id="LoginButton" fx:id="buttonLogin" layoutX="106.0" layoutY="213.0" onAction="#handleButtonLogin" prefHeight="25.0" prefWidth="53.0" text="Login" />
                           <Label fx:id="labelLogin" layoutX="104.0" layoutY="246.0" minHeight="16" minWidth="69" prefHeight="17.0" prefWidth="171.0" />
-                        <TextField id="UserTextField" fx:id="txtfieldUsername" layoutX="103.0" layoutY="110.0" prefHeight="25.0" prefWidth="174.0" />
                         <Text layoutX="43.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
                         <Text layoutX="43.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="53.291015625" />
                         <Button fx:id="buttonExit" layoutX="222.0" layoutY="213.0" mnemonicParsing="false" onAction="#handleButtonExit" prefHeight="25.0" prefWidth="53.0" text="Exit" />
@@ -38,23 +39,25 @@
                            </font>
                         </Text>
                         <Button fx:id="buttonCreate" layoutX="164.0" layoutY="213.0" mnemonicParsing="false" onAction="#handleButtonCreate" text="Create" />
-                        <PasswordField fx:id="textFieldPassword" layoutX="103.0" layoutY="144.0" />
                         <CheckBox fx:id="checkBox" alignment="CENTER" contentDisplay="BOTTOM" layoutX="168.0" layoutY="179.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="Show Password?" textAlignment="JUSTIFY" />
+                        <TextField fx:id="textFieldForPassword" focusTraversable="false" layoutX="103.0" layoutY="144.0" visible="false" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
           <Tab text="Manager">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #FFFFFFF;">
                      <children>
                         <Text layoutX="43.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
                         <Text layoutX="43.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="53.291015625" />
                         <TextField id="UserTextField" fx:id="getTxtfieldUsernameManager" layoutX="103.0" layoutY="110.0" prefHeight="25.0" prefWidth="174.0" />
-                        <Button id="LoginButton" fx:id="buttonManagerLogin" layoutX="103.0" layoutY="190.0" onAction="#handleButtonLoginManager" prefHeight="25.0" prefWidth="53.0" text="Login" />
-                        <Button fx:id="buttonExit1" layoutX="224.0" layoutY="190.0" mnemonicParsing="false" onAction="#handleButtonExit" prefHeight="25.0" prefWidth="53.0" text="Exit" />
+                        <Button id="LoginButton" fx:id="buttonManagerLogin" layoutX="99.0" layoutY="223.0" onAction="#handleButtonLoginManager" prefHeight="25.0" prefWidth="53.0" text="Login" />
+                        <Button fx:id="buttonExit1" layoutX="223.0" layoutY="223.0" mnemonicParsing="false" onAction="#handleButtonExit" prefHeight="25.0" prefWidth="53.0" text="Exit" />
                         <Label fx:id="labelManagerLogin" layoutX="105.0" layoutY="227.0" minHeight="16" minWidth="69" prefHeight="17.0" prefWidth="171.0" />
-                        <PasswordField fx:id="getTxtfieldPasswordManager" layoutX="105.0" layoutY="152.0" />
+                        <PasswordField fx:id="getTxtfieldPasswordManager" layoutX="105.0" layoutY="144.0" />
+                        <TextField fx:id="textFieldForPasswordManager" layoutX="105.0" layoutY="144.0" />
+                        <CheckBox fx:id="checkBox2" alignment="CENTER" contentDisplay="BOTTOM" layoutX="169.0" layoutY="182.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="0.0" prefWidth="109.0" text="Show Password?" textAlignment="JUSTIFY" />
                      </children></AnchorPane>
             </content>
           </Tab>
