@@ -276,12 +276,15 @@ void tabClicked(Event ev) {
         //System.out.println("ROOM OS EMPTY \n\n\n");
         rooms.add(new Room("Room 1A",false,200));
         rooms.get(0).setAvailable(false);
+        rooms.get(0).setPictureUrl("sample/Room1A.jpg"); //Set Picture URL
         rooms.get(0).setOccupiedGuest(new Guest("BruceWayne","batman"));//John Doe occupies room 1A
         rooms.add(new Room("Room 2A",true,300));
         rooms.get(1).setAvailable(true);
+        rooms.get(1).setPictureUrl("sample/Room2A.jpg"); //Set Picutre URL
         rooms.add(new Room("Room 3A",false,500));
         rooms.get(2).setAvailable(false);
         rooms.get(2).setOccupiedGuest(new Guest("ClarkKent","superman"));//John Doe occupies room 1A
+        rooms.get(2).setPictureUrl("sample/Room3A.jpg");
       }
 
       /**
@@ -355,9 +358,11 @@ void tabClicked(Event ev) {
 
       }
       labelPricePerDay.setText(Double.toString(roomClickedOn.getPrice()));
- // Image image = new Image("@Room1A.jpg");
+ Image image = new Image(roomClickedOn.getPictureUrl());
+  imageViewRoom.setImage(image);
+ // Image image = new Image("sample/Room2A.jpg"); THIS WORKS
   //Image image = new Image(new File("za.png").toURI().toString());
-  //imageViewRoom.setImage(image);
+
 //  ImageView iv2 = new ImageView();
 //  iv2.setImage(image);
 //  iv2.setFitWidth(100);

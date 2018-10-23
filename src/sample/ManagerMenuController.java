@@ -38,6 +38,8 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -83,11 +85,11 @@ public class ManagerMenuController implements Initializable {
     private int daysStaying;
     private boolean initializedRooms=false;
     @FXML
-    private TableView<Employee> employeeTable = new TableView<Employee>();
-    private ObservableList<Employee> data; //This is where emplyees are stored
+    private TableView<Employee> employeeTable = new TableView<Employee>();//Table View to show employees
+    private ObservableList<Employee> data; //This is where Employee List of served
     final HBox hb = new HBox();
 
-    @FXML
+    @FXML//Unused
     public void storeVariables2(ArrayList<String> unLIST, ArrayList<String> pwList,
         ArrayList<Guest> gList, List<Room> rooms){
         System.out.println("HERE FIRST?");
@@ -109,6 +111,8 @@ public class ManagerMenuController implements Initializable {
 
     @FXML
     private TabPane tabPane;
+    @FXML
+    private ImageView imageViewRoom;
 
     @FXML
     private Label labelAvailable,labelGuestName;
@@ -161,17 +165,29 @@ public class ManagerMenuController implements Initializable {
     @FXML private Tab tabAddEmployee;
 
     @FXML void handleAddButton(){
+        /**
+         * When user click add button it the program will move to the Add employee tab
+         */
         tabAddEmployee.setDisable(false);
         tabPane.getSelectionModel().select(tabAddEmployee);
 
     }
     @FXML void handleSubmit(){
+        /**
+         * When user tries to create an Employee this method will run
+         * It will check if the inputs are valud
+         * Emp Name needs to be a string
+         * EMP ID needs to be a int or it will it throw an error
+         * EMP Payroll needs to be a double or it will throw an error
+         * Added try and catches to catch error and tell user what to fix
+         *
+         */
         Boolean successful11=true;
         String empName= textFieldEmpName.getText();
         int empID=0;
         Double empPayRoll =0.0;
         System.out.println(textFieldEmpPayRoll.getText());
-        labelSuccessSubmit.setText("WHATTHE");
+        //labelSuccessSubmit.setText("WHATTHE");
 
         try{
             empID= Integer.parseInt(textFieldEmpID.getText());
@@ -189,7 +205,10 @@ public class ManagerMenuController implements Initializable {
             labelSuccessSubmit.setText("Payroll Input Error.");
         }
         if (successful11== true && successful12 == true){
-            //correct inputs, allow sumbit
+            /**
+             * Allow Employee to be sumbited to employeelist and added to the tableView
+             */
+            //correct inputs, allow submittion
             labelSuccessSubmit.setText("Employee added succesfully!");
             data.add(new Employee(empName,empPayRoll,empID ));
 
@@ -200,6 +219,9 @@ public class ManagerMenuController implements Initializable {
     }
 
     @FXML void handleDeleteEmployee(){
+        /**
+         * This deletes the employee was that seleceted
+         */
         data.remove(employeeClickedOn);
         System.out.println(employeeClickedOn.getName()+"IS GONE");
         employeeClickedOn= null;
@@ -209,7 +231,7 @@ public class ManagerMenuController implements Initializable {
     }
 
     @FXML
-    void handleAdd(){
+    void handleAdd(){ //No Longer used
         System.out.println("add");
         data.add(new Employee(
             "Mark Jackson",
@@ -246,6 +268,12 @@ public class ManagerMenuController implements Initializable {
 //        } catch(Exception e) {
 //            e.printStackTrace();
 //        }
+        /**
+         * Opening the FXMLDOCUMENT CONTROLLER is slighty different than opening other controllers
+         * The controller is called after the fxml is loaded.
+         * The data is stored via the storeVariables method.
+         * It just works, dont ask me.
+         */
         Stage stageExit = (Stage) signoutButton.getScene().getWindow();
         stageExit.close();
         FXMLLoader Loader = new FXMLLoader();
@@ -260,6 +288,7 @@ public class ManagerMenuController implements Initializable {
         // display.setText(name_Text,email_Text); //using displaytextcontroller's method
         FXMLDocumentController storeFields =Loader.getController();
         int i=0;
+        //Check is lists are same
         for (String word :usernameList){
             System.out.println("Name = " + word);
             System.out.println(passwordList.get(i));
@@ -276,7 +305,7 @@ public class ManagerMenuController implements Initializable {
         Parent p = Loader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(p));
-        stage.show();
+        stage.show(); //open window
 
 
 
@@ -284,9 +313,9 @@ public class ManagerMenuController implements Initializable {
 
     ManagerMenuController(ArrayList<String> unLIST, ArrayList<String> pwList,
         ArrayList<Guest> gList,List<Room> rooms,ObservableList<Employee> data ){
-        System.out.println("herefirst?");
+       // System.out.println("herefirst?");
         /**
-         * Happens after initialize class
+         * This will make sure ManagerMenuController gets the arrrays and variables from the fXML controller
          */
 
         this.usernameList = unLIST;
@@ -295,7 +324,7 @@ public class ManagerMenuController implements Initializable {
         //this.currentGuest = g1;
         this.rooms = rooms;
         this.data = data;
-        System.out.println("In Constructor");
+        //System.out.println("In Constructor");
 
     }
     /**
@@ -303,10 +332,17 @@ public class ManagerMenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        /**
+         * In this initalizer, it happens after the constructor
+         * Here we will add items ot the TableView Emplyees and the ListView of Rooms
+         * It will make a defeault set if both of those are empty.
+         *
+         */
         tabAddEmployee.setDisable(true);
         System.out.println("HERE IN INTAILIZE MANAGER");
        // data =;
         if (data.isEmpty()){
+            //Make default table of employees
             System.out.println("DATA EMPTY\n\n\n\n");
             data =
                 FXCollections.observableArrayList(
@@ -345,25 +381,49 @@ public class ManagerMenuController implements Initializable {
         //columnPayroll.setCellValueFactory(new PropertyValueFactory<Employee, String>("active"));
         //TableColumn firstNameCol = new TableColumn("First Name");
        // columnEmployeeID.setMinWidth(100);
+        /**
+         * This fills the Column name EmployeeNAme with Data
+         * Need to look up how setCellValueFactories work
+         *
+         */
         columnNameEmployee.setCellValueFactory(
-            new PropertyValueFactory<Employee, String>("name"));
+            new PropertyValueFactory<Employee, String>("name")); //What goes in the () is the name of the Variable in the Employe class
+
 
         //TableColumn lastNameCol = new TableColumn("Last Name");
       //  columnNameEmployee.setMinWidth(100);
+        /**
+         * This fills the Column payroll with Data
+         * Need to look up how setCellValueFactories work
+         *
+         */
         columnPayroll.setCellValueFactory(
             new PropertyValueFactory<Employee, Double>("payHourly"));
 
         //TableColumn emailCol = new TableColumn("Email");
         //columnPayroll.setMinWidth(200);
+        /**
+         * This fills the Column name EmployeeID with Data
+         * Need to look up how setCellValueFactories work
+         *
+         */
         columnEmployeeID.setCellValueFactory(
             new PropertyValueFactory<Employee, Integer>("employeeID"));
 
+        /**
+         * This fills the table with the employee list named data
+         *
+         */
         tableViewEmployees.setItems(data);
        // tableViewEmployees.getColumns().addAll(columnEmployeeID, columnPayroll, columnEmployeeID);
         // TODO
            // tableViewEmployees.setOnMousePressed((MouseEvent event) );
         tableViewEmployees.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
+            /**
+             * This will add a MouseClick event listener to the TableView Employees
+             * that will check if a Employee is selected.
+             *
+             */
             @Override
             public void handle(MouseEvent event) {
                 String employeeSelected = tableViewEmployees.getSelectionModel().getSelectedItem().toString();
@@ -390,19 +450,25 @@ public class ManagerMenuController implements Initializable {
         });
 
 
-
+/**
+ * See Guest Menu for Notes, exactly the same
+ *
+ */
 
         if (rooms.isEmpty())
         {
             System.out.println("ROOM OS EMPTY \n\n\n");
             rooms.add(new Room("1A",false,200));
             rooms.get(0).setAvailable(false);
+            rooms.get(0).setPictureUrl("sample/Room1A.jpg"); //Set Picture URL
             rooms.get(0).setOccupiedGuest(new Guest("BruceWayne","batman"));//John Doe occupies room 1A
             rooms.add(new Room("Room 2A",true,300));
             rooms.get(1).setAvailable(true);
+            rooms.get(1).setPictureUrl("sample/Room2A.jpg"); //Set Picture URL
             rooms.add(new Room("Room 3A",false,500));
             rooms.get(2).setAvailable(false);
             rooms.get(2).setOccupiedGuest(new Guest("ClarkKent","superman"));//John Doe occupies room 1A
+            rooms.get(2).setPictureUrl("sample/Room3A.jpg"); //Set Picture URL
         }
 
 
@@ -410,6 +476,10 @@ public class ManagerMenuController implements Initializable {
 
         listProperty.set(FXCollections.observableArrayList(rooms));
         roomListView.setCellFactory(new RoomCellFactory());
+        /**
+         * Makes a listener so we can know what the user seleceted
+         *
+         */
         roomListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
             @Override
@@ -440,6 +510,10 @@ public class ManagerMenuController implements Initializable {
     }
     @FXML
     private void handleRemoveGuest(){
+        /**
+         * Removes Guest from listViewRooms
+         *
+         */
         System.out.println("REmvoing Guest");
         if (roomClickedOn != null){
             //So theres a room clicked on
@@ -455,6 +529,10 @@ public class ManagerMenuController implements Initializable {
 
 
     private void displayRoomFeatures(Room roomClickedOn) {
+        /**
+         * Same as GuestMenuController
+         *
+         */
         if (roomClickedOn.getAvailable()){
             //true
             labelAvailable.setText("Not Book");
@@ -466,6 +544,8 @@ public class ManagerMenuController implements Initializable {
             //bookRoombutton.setDisable(true);
 
         }
+        Image image = new Image(roomClickedOn.getPictureUrl());
+        imageViewRoom.setImage(image);
         labelPricePerDay.setText(Double.toString(roomClickedOn.getPrice()));
 
         labelDaysStaying.setText(Integer.toString(roomClickedOn.getDaysStaying()));

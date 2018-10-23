@@ -1,4 +1,10 @@
 package sample;
+/**
+ * Employee.java Class
+ * Simple____Property allows for ease in making columsn in table views
+ * Look up how SimpleStringPropertyWorks
+ *
+ */
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -25,13 +31,13 @@ public  class Employee {
   }
 
   public Double getPayHourly() {
-    System.out.println("HERE");
+   // System.out.println("HERE");
     //return "out";
     return payHourly.get();
   }
 
   public void setPayHourly(Double payme) {
-    System.out.println("paymee");
+   // System.out.println("paymee");
     payHourly.set(payme);
 
   }
