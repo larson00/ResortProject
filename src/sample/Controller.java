@@ -21,7 +21,7 @@ public abstract class  Controller{
   private ArrayList<String> passwordList = new ArrayList<>();//Array:ist of password Field
   private ArrayList<Guest> guestList = new ArrayList<>();//Arraylist of Guests
   private List<Room> rooms = new ArrayList<>();//Arraylist of rooms that Manager/Guest Menu's use
- // private Guest currentGuestLoggedIn; //FXMLDocumentController keeps track of guest to send to GuestMenu
+ // private Guest currentGuestLoggedIn; //LoginMenuController keeps track of guest to send to GuestMenu
   private ObservableList<Employee> data= FXCollections.observableArrayList(); // Arraylist of Employees for MaanagerMenu
   private Manager admin;//Not used
 

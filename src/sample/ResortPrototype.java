@@ -19,7 +19,7 @@ public class ResortPrototype extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("LoginMenu/FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("LoginMenu/LoginMenu.fxml"));
         
         Scene scene = new Scene(root);
         

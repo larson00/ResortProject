@@ -29,8 +29,10 @@ import javafx.stage.Stage;
 import sample.Controller;
 import sample.Employee;
 import sample.Global;
+import sample.Global.WindowLocation;
 import sample.Guest;
 import sample.GuestMenu.GuestMenuController;
+import sample.GuestMenu.GuestMenuHomeController;
 import sample.ManagerMenu.ManagerMenuController;
 import sample.Room;
 
@@ -40,7 +42,7 @@ import sample.Room;
  * Make sure there no java.awt as it will case Errors
  *
  *
- * FXMLDocumentController.java
+ * LoginMenuController.java
  * Notes by:pPetit
  * This is bascially the "main" of the project.
  * This houses the login screen: Guest Login and Maanager Login
@@ -60,7 +62,7 @@ import sample.Room;
  * @author ggrab
  */
 
-public class FXMLDocumentController extends Controller implements Initializable {
+public class LoginMenuController extends Controller implements Initializable {
    // private ArrayList<String> usernameList = new ArrayList<>(); //ArrayList of username Fields
    private ArrayList<String> usernameList;
   // private ArrayList<String> usernameList =super.getUsernameList();
@@ -153,27 +155,19 @@ private CheckBox checkBox; //CheckBo for handling showPassword
       Stage stage = (Stage) buttonCreate.getScene().getWindow(); //Asks a object in the window to store it's WindowID
             stage.close(); //Close current Window
 
-      //Make Object of Controller so we can use it's constructor to pass Variables
-      GuestMenuController guestController = new GuestMenuController();
-
-
     //Loads FXML Loader
-      FXMLLoader Loader = new FXMLLoader(); //sample.GuestMenu.FXMLDocumentController
-      Loader.setLocation(getClass().getResource("GuestMenu.fxml")); //Call new window
+      FXMLLoader Loader = new FXMLLoader();
+      //Using Global's Enum named WindowLocation get the Url for the EnumType
+      String url = WindowLocation.GUESTMENUHOME.getLocation();
+      //load the url you just acquired.
+      Loader.setLocation(getClass().getResource(url));
       try {
-        Loader.setController(guestController);
+        // Loader.setController(guestController);
         Loader.load(); //Loads
       }catch ( IOException ex){
         Logger.getLogger(GuestMenuController.class.getName()).log(Level.SEVERE, null ,ex);
 
       }
-      //  DisplayTextController display = Loader.getController(); //Calling DisplayTextcontroller file
-      // display.setText(name_Text,email_Text); //using displaytextcontroller's method
-    //  GuestMenuController storeFields =Loader.getController(); //Calling the new window's  controller
-     // storeFields.storeVariables(usernameList,passwordList,guestList,g1,rooms); //Calling the controller's method
-      //Store Variables will store the lists of users, passwords and guest
-      //GuestMenu's store Variables also takes the guest selected by user.
-      //
 
       Parent p = Loader.getRoot();
        stage = new Stage();
@@ -422,8 +416,8 @@ private CheckBox checkBox; //CheckBo for handling showPassword
     Stage stageExit = (Stage) buttonExit1.getScene().getWindow();//
     stageExit.close();//Closes curerent Stage
 
-    FXMLLoader Loader = new FXMLLoader(); //sample.LoginMenu.FXMLDocumentController
-    Loader.setLocation(getClass().getResource("ManagerMenu.ManagerMenu.fxml")); //Call new window
+    FXMLLoader Loader = new FXMLLoader(); //sample.LoginMenu.LoginMenuController
+    Loader.setLocation(getClass().getResource("/sample/ManagerMenu/ManagerMenu.fxml")); //Call new window
     try {
       Loader.setController(managerController);
       Loader.load(); //Loads

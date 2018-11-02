@@ -42,7 +42,7 @@ import sample.Employee;
 import sample.Global;
 import sample.Guest;
 import sample.GuestMenu.GuestMenuController;
-import sample.LoginMenu.FXMLDocumentController;
+import sample.LoginMenu.LoginMenuController;
 import sample.Room;
 import sample.Room.RoomCellFactory;
 
@@ -259,7 +259,7 @@ public class ManagerMenuController extends Controller implements Initializable {
 //        try {
 //            Stage stage = (Stage) signoutButton.getScene().getWindow();
 //            stage.close();
-//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoginMenu.fxml"));
 //            Parent root1 = (Parent) fxmlLoader.load();
 //            stage = new Stage();
 //            stage.setScene(new Scene(root1));
@@ -276,7 +276,7 @@ public class ManagerMenuController extends Controller implements Initializable {
         Stage stageExit = (Stage) signoutButton.getScene().getWindow();
         stageExit.close();
         FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource("FXMLDocument.fxml"));
+        Loader.setLocation(getClass().getResource("/sample/LoginMenu/LoginMenu.fxml"));
         try {
             Loader.load();
         }catch ( IOException ex){
@@ -285,7 +285,7 @@ public class ManagerMenuController extends Controller implements Initializable {
         }
         //  DisplayTextController display = Loader.getController(); //Calling DisplayTextcontroller file
         // display.setText(name_Text,email_Text); //using displaytextcontroller's method
-        FXMLDocumentController storeFields =Loader.getController();
+        LoginMenuController storeFields =Loader.getController();
         int i=0;
         //Check is lists are same
         for (String word :usernameList){

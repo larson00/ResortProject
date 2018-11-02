@@ -17,8 +17,37 @@ public class Global {
   static public ArrayList<String> passwordList = new ArrayList<>();//Array:ist of password Field
   static public ArrayList<Guest> guestList = new ArrayList<>();//Arraylist of Guests
   static public List<Room> rooms = new ArrayList<>();//Arraylist of rooms that Manager/Guest Menu's use
-  static  public Guest currentGuestLoggedIn; //FXMLDocumentController keeps track of guest to send to GuestMenu
+  static  public Guest currentGuestLoggedIn; //LoginMenuController keeps track of guest to send to GuestMenu
   static  public ObservableList<Employee> data= FXCollections.observableArrayList(); // Arraylist of Employees for MaanagerMenu
   static  public Manager admin;//Not used
+
+  /**
+   * URl Locations for quick refernce
+   */
+ public  enum WindowLocation {
+    LOGINMENU(""),
+    SIGNUP(""),
+    MANAGERMENU(""),
+    GUESTMENUHOME("/sample/GuestMenu/GuestMenuHome.fxml"),
+    GUESTMENUROOM(""),
+
+    ;
+    private String url;
+    ;
+
+
+    WindowLocation(String urlL) {
+      url = urlL;
+    }
+
+    public String getLocation(){
+
+      return url;
+    };
+
+
+
+  }
+
 
 }

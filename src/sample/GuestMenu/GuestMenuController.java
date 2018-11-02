@@ -35,7 +35,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import sample.Controller;
 import sample.Employee;
-import sample.LoginMenu.FXMLDocumentController;
+import sample.LoginMenu.LoginMenuController;
 import sample.Global;
 import sample.Guest;
 import sample.Room;
@@ -43,9 +43,9 @@ import sample.Room.RoomCellFactory;
 
 
 /**
- * FXML Controller class
+ *
  *Notes:ppEtit
- *GuestMenuController.java
+ *GuestMenuController.java NEED TO CHNAGE TO GUESTROOMMENU
  *
  * This controller controls the GuestMenu.fxml
  * This allows the gues to:
@@ -179,7 +179,7 @@ void tabClicked(Event ev) {
 //        try {
 //            Stage stage = (Stage) signoutButton.getScene().getWindow();
 //            stage.close();
-//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoginMenu.fxml"));
 //            Parent root1 = (Parent) fxmlLoader.load();
 //            stage = new Stage();
 //            stage.setScene(new Scene(root1));
@@ -198,7 +198,7 @@ void tabClicked(Event ev) {
       Stage stageExit = (Stage) signoutButton.getScene().getWindow();
             stageExit.close(); //close current window
       FXMLLoader Loader = new FXMLLoader();
-      Loader.setLocation(getClass().getResource("FXMLDocument.fxml")); //get FXML path
+      Loader.setLocation(getClass().getResource("/sample/LoginMenu/LoginMenu.fxml")); //get FXML path
       try {
         Loader.load();
       }catch ( IOException ex){
@@ -207,7 +207,7 @@ void tabClicked(Event ev) {
       }
       //  DisplayTextController display = Loader.getController(); //Calling DisplayTextcontroller file
       // display.setText(name_Text,email_Text); //using displaytextcontroller's method
-      FXMLDocumentController storeFields =Loader.getController();
+      LoginMenuController storeFields =Loader.getController();
       storeFields.storeVariables1(); //This method will stoer the variables
 
 
@@ -252,7 +252,7 @@ void tabClicked(Event ev) {
        *
        */
       System.out.println("HERE IN INTAILIZE");
-
+        bookRoombutton.setDisable(true);
       if (rooms.isEmpty())
       {
         //Make Default room list

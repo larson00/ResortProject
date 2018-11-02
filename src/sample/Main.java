@@ -16,14 +16,14 @@ import javafx.stage.Stage;
  * @author ggrab, pPetit
  * Reosrt Project Main.java
  * This project will allow guests to book rooms, and Managers to manage employees and rooms
- * This main file opens the FXMLDocumentController
+ * This main file opens the LoginMenuController
  *
  */
 public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("LoginMenu/FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("LoginMenu/LoginMenu.fxml"));
         //Setting Defaults
 
 
