@@ -75,8 +75,9 @@ import javafx.util.Callback;
  */
 
 
-public class ManagerMenuController implements Initializable {
-    private ArrayList<String> usernameList;
+public class ManagerMenuController extends Controller implements Initializable {
+  //  private ArrayList<String> usernameList;
+  private ArrayList<String> usernameList;
     private ArrayList<String> passwordList;
     private ArrayList<Guest> guestList;
     private Guest currentGuest;
@@ -96,7 +97,7 @@ public class ManagerMenuController implements Initializable {
         this.usernameList = unLIST;
         this.passwordList = pwList;
         this.guestList = gList;
-       // this.currentGuest = g1;
+       // this.currentGuestLoggedIn = g1;
         this.rooms = rooms;
         int i=0;
         for (String word :usernameList){
@@ -294,7 +295,7 @@ public class ManagerMenuController implements Initializable {
             System.out.println(passwordList.get(i));
             i++;
         }
-        storeFields.storeVariables1(usernameList,passwordList,guestList,rooms,data);
+        storeFields.storeVariables1();
 
 
         for (Employee e: data
@@ -311,20 +312,17 @@ public class ManagerMenuController implements Initializable {
 
     }
 
-    ManagerMenuController(ArrayList<String> unLIST, ArrayList<String> pwList,
-        ArrayList<Guest> gList,List<Room> rooms,ObservableList<Employee> data ){
+    ManagerMenuController( ){
        // System.out.println("herefirst?");
         /**
-         * This will make sure ManagerMenuController gets the arrrays and variables from the fXML controller
+         * This will make sure ManagerMenuController gets the arrays and variables from the fXML controller
          */
 
-        this.usernameList = unLIST;
-        this.passwordList = pwList;
-        this.guestList = gList;
-        //this.currentGuest = g1;
-        this.rooms = rooms;
-        this.data = data;
-        //System.out.println("In Constructor");
+      this.usernameList = Global.usernameList;
+      this.passwordList = Global.passwordList;
+      this.guestList = Global.guestList;
+      this.rooms = Global.rooms;
+      this.data = Global.data;
 
     }
     /**

@@ -52,10 +52,10 @@
                         <Text layoutX="43.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
                         <Text layoutX="43.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="53.291015625" />
                         <TextField id="UserTextField" fx:id="getTxtfieldUsernameManager" layoutX="103.0" layoutY="110.0" prefHeight="25.0" prefWidth="174.0" />
-                        <Button id="LoginButton" fx:id="buttonManagerLogin" layoutX="99.0" layoutY="223.0" onAction="#handleButtonLoginManager" prefHeight="25.0" prefWidth="53.0" text="Login" />
-                        <Button fx:id="buttonExit1" layoutX="223.0" layoutY="223.0" mnemonicParsing="false" onAction="#handleButtonExit" prefHeight="25.0" prefWidth="53.0" text="Exit" />
                         <Label fx:id="labelManagerLogin" layoutX="105.0" layoutY="227.0" minHeight="16" minWidth="69" prefHeight="17.0" prefWidth="171.0" />
                         <PasswordField fx:id="getTxtfieldPasswordManager" layoutX="105.0" layoutY="144.0" />
+                        <Button id="LoginButton" fx:id="buttonManagerLogin" layoutX="99.0" layoutY="223.0" mnemonicParsing="false" onAction="#handleButtonLoginManager" prefHeight="25.0" prefWidth="53.0" text="Login" />
+                        <Button fx:id="buttonExit1" layoutX="223.0" layoutY="223.0" mnemonicParsing="false" onAction="#handleButtonExit" prefHeight="25.0" prefWidth="53.0" text="Exit" />
                         <TextField fx:id="textFieldForPasswordManager" layoutX="105.0" layoutY="144.0" />
                         <CheckBox fx:id="checkBox2" alignment="CENTER" contentDisplay="BOTTOM" layoutX="169.0" layoutY="182.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="0.0" prefWidth="109.0" text="Show Password?" textAlignment="JUSTIFY" />
                      </children></AnchorPane>

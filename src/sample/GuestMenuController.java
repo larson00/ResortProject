@@ -66,8 +66,9 @@ import javafx.stage.Stage;
  *
  * @author ggraber7402
  */
-public class GuestMenuController implements Initializable {
+public class GuestMenuController extends Controller implements Initializable {
   private ArrayList<String> usernameList;
+// private ArrayList<String> usernameList =super.getUsernameList();
   private ArrayList<String> passwordList;
   private ArrayList<Guest> guestList;
   private Guest currentGuest;
@@ -76,26 +77,12 @@ public class GuestMenuController implements Initializable {
   private boolean initializedRooms=false;
   private ObservableList<Employee> data;
 
-//No Longer used anymore
-  @FXML
-  public void storeVariables(ArrayList<String> unLIST, ArrayList<String> pwList,
-      ArrayList<Guest> gList, Guest g1,List<Room> rooms){
-    System.out.println("HERE FIRST?");
-    this.usernameList = unLIST;
-    this.passwordList = pwList;
-    this.guestList = gList;
-    this.currentGuest = g1;
-    this.rooms = rooms;
-    int i=0;
-    for (String word :usernameList){
-      System.out.println("Name = " + word);
-      System.out.println(passwordList.get(i));
-      i++;
-    }
 
 
 
-  }
+
+
+
   @FXML
   private Label labelTotalPriceShow,paymentSucces,labelPaymentSuccess;
 
@@ -224,7 +211,7 @@ void tabClicked(Event ev) {
       //  DisplayTextController display = Loader.getController(); //Calling DisplayTextcontroller file
       // display.setText(name_Text,email_Text); //using displaytextcontroller's method
       FXMLDocumentController storeFields =Loader.getController();
-      storeFields.storeVariables1(usernameList,passwordList,guestList,rooms,data); //This method will stoer the variables
+      storeFields.storeVariables1(); //This method will stoer the variables
 
 
       Parent p = Loader.getRoot();
@@ -237,20 +224,19 @@ void tabClicked(Event ev) {
 
     }
 
-    GuestMenuController(ArrayList<String> unLIST, ArrayList<String> pwList,
-        ArrayList<Guest> gList, Guest g1,List<Room> rooms,  ObservableList<Employee> data){
+    GuestMenuController(){
       /**
        * Happens before initalize class, this this program atleast.
        * In others it's the oppopsite
        * This stores the variables from other controllers so it all matches.
        */
       //System.out.println("In Constructor");
-      this.usernameList = unLIST;
-      this.passwordList = pwList;
-      this.guestList = gList;
-      this.currentGuest = g1;
-      this.rooms = rooms;
-      this.data = data;
+      this.usernameList = Global.usernameList;
+      this.passwordList = Global.passwordList;
+      this.guestList = Global.guestList;
+      this.rooms = Global.rooms;
+      this.data = Global.data;
+      this.currentGuest= Global.currentGuestLoggedIn;
 
 
     }
