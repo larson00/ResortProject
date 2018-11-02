@@ -3,11 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sample;
+package sample.LoginMenu;
 
-import com.sun.javafx.scene.control.behavior.PasswordFieldBehavior;
-import com.sun.javafx.scene.control.skin.TextFieldSkin;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -15,7 +12,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,6 +26,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import sample.Controller;
+import sample.Employee;
+import sample.Global;
+import sample.Guest;
+import sample.GuestMenu.GuestMenuController;
+import sample.ManagerMenu.ManagerMenuController;
+import sample.Room;
 
 /**
  * Notes
@@ -112,7 +115,7 @@ private CheckBox checkBox; //CheckBo for handling showPassword
         //    + " Guest Name: "+r.getOccupiedGuest().getUserName()
         );
         // System.out.println(r.getName());
-        if (r.occupiedGuest==null)
+        if (r.getOccupiedGuest() ==null)
         {
           System.out.println("NULL GUEST");
         }else{
@@ -155,7 +158,7 @@ private CheckBox checkBox; //CheckBo for handling showPassword
 
 
     //Loads FXML Loader
-      FXMLLoader Loader = new FXMLLoader();
+      FXMLLoader Loader = new FXMLLoader(); //sample.GuestMenu.FXMLDocumentController
       Loader.setLocation(getClass().getResource("GuestMenu.fxml")); //Call new window
       try {
         Loader.setController(guestController);
@@ -419,8 +422,8 @@ private CheckBox checkBox; //CheckBo for handling showPassword
     Stage stageExit = (Stage) buttonExit1.getScene().getWindow();//
     stageExit.close();//Closes curerent Stage
 
-    FXMLLoader Loader = new FXMLLoader();
-    Loader.setLocation(getClass().getResource("ManagerMenu.fxml")); //Call new window
+    FXMLLoader Loader = new FXMLLoader(); //sample.LoginMenu.FXMLDocumentController
+    Loader.setLocation(getClass().getResource("ManagerMenu.ManagerMenu.fxml")); //Call new window
     try {
       Loader.setController(managerController);
       Loader.load(); //Loads

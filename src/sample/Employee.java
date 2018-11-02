@@ -16,7 +16,7 @@ public  class Employee {
   private final SimpleDoubleProperty payHourly;
   private final SimpleIntegerProperty employeeID;
 
-  Employee(String fName, double payme, Integer id) {
+  public Employee(String fName, double payme, Integer id) {
     this.name = new SimpleStringProperty(fName);
     this.payHourly = new SimpleDoubleProperty(payme);
     this.employeeID = new SimpleIntegerProperty(id);

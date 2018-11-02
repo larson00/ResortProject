@@ -86,6 +86,14 @@ public class Room {
   public Room(String name) {
     this.name = name;
   }
+
+  public static class RoomCellFactory implements Callback<ListView<Room>, ListCell<Room>> {
+
+    @Override
+    public ListCell<Room> call(ListView<Room> listview) {
+      return new RoomCell();
+    }
+  }
 }
 
 class RoomCell  extends ListCell<Room>
@@ -114,10 +122,3 @@ class RoomCell  extends ListCell<Room>
 }
 
 
-class RoomCellFactory implements Callback<ListView<Room>, ListCell<Room>> {
-
-  @Override
-  public ListCell<Room> call(ListView<Room> listview) {
-    return new RoomCell();
-  }
-}

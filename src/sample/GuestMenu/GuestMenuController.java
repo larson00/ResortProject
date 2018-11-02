@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sample;
+package sample.GuestMenu;
 import  javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.net.URL;
@@ -27,22 +27,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javax.swing.Action;
-import javafx.application.Application;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
+import sample.Controller;
+import sample.Employee;
+import sample.LoginMenu.FXMLDocumentController;
+import sample.Global;
+import sample.Guest;
+import sample.Room;
+import sample.Room.RoomCellFactory;
 
 
 /**
@@ -224,7 +221,7 @@ void tabClicked(Event ev) {
 
     }
 
-    GuestMenuController(){
+    public GuestMenuController(){
       /**
        * Happens before initalize class, this this program atleast.
        * In others it's the oppopsite
@@ -262,15 +259,15 @@ void tabClicked(Event ev) {
         //System.out.println("ROOM OS EMPTY \n\n\n");
         rooms.add(new Room("Room 1A",false,200));
         rooms.get(0).setAvailable(false);
-        rooms.get(0).setPictureUrl("sample/Room1A.jpg"); //Set Picture URL
+        rooms.get(0).setPictureUrl("sample/Pictures/Room1A.jpg"); //Set Picture URL
         rooms.get(0).setOccupiedGuest(new Guest("BruceWayne","batman"));//John Doe occupies room 1A
         rooms.add(new Room("Room 2A",true,300));
         rooms.get(1).setAvailable(true);
-        rooms.get(1).setPictureUrl("sample/Room2A.jpg"); //Set Picutre URL
+        rooms.get(1).setPictureUrl("sample/Pictures/Room2A.jpg"); //Set Picutre URL
         rooms.add(new Room("Room 3A",false,500));
         rooms.get(2).setAvailable(false);
         rooms.get(2).setOccupiedGuest(new Guest("ClarkKent","superman"));//John Doe occupies room 1A
-        rooms.get(2).setPictureUrl("sample/Room3A.jpg");
+        rooms.get(2).setPictureUrl("sample/Pictures/Room3A.jpg");
       }
 
       /**

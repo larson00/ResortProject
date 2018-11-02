@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="262.0" prefWidth="320" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="262.0" prefWidth="320" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginMenu.FXMLDocumentController">
     <children>
       <TabPane prefHeight="322.0" prefWidth="320.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -30,7 +30,7 @@
                         <Button fx:id="buttonExit" layoutX="222.0" layoutY="213.0" mnemonicParsing="false" onAction="#handleButtonExit" prefHeight="25.0" prefWidth="53.0" text="Exit" />
                         <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="44.0" layoutY="215.0">
                            <image>
-                              <Image url="@icons8-beach-filled-50.png" />
+                              <Image url="@../icons8-beach-filled-50.png" />
                            </image>
                         </ImageView>
                         <Text layoutX="53.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ruby Resort" textAlignment="CENTER" wrappingWidth="212.13671875">

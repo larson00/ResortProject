@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sample;
+package sample.ManagerMenu;
 
 import java.io.IOException;
 import java.net.URL;
@@ -14,8 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,8 +21,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,9 +28,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -42,11 +36,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Callback;
+import sample.Controller;
+import sample.Employee;
+import sample.Global;
+import sample.Guest;
+import sample.GuestMenu.GuestMenuController;
+import sample.LoginMenu.FXMLDocumentController;
+import sample.Room;
+import sample.Room.RoomCellFactory;
 
 /**
  * FXML Controller class
@@ -312,7 +310,7 @@ public class ManagerMenuController extends Controller implements Initializable {
 
     }
 
-    ManagerMenuController( ){
+    public ManagerMenuController(){
        // System.out.println("herefirst?");
         /**
          * This will make sure ManagerMenuController gets the arrays and variables from the fXML controller
@@ -458,15 +456,15 @@ public class ManagerMenuController extends Controller implements Initializable {
             System.out.println("ROOM OS EMPTY \n\n\n");
             rooms.add(new Room("1A",false,200));
             rooms.get(0).setAvailable(false);
-            rooms.get(0).setPictureUrl("sample/Room1A.jpg"); //Set Picture URL
+            rooms.get(0).setPictureUrl("sample/Pictures/Room1A.jpg"); //Set Picture URL
             rooms.get(0).setOccupiedGuest(new Guest("BruceWayne","batman"));//John Doe occupies room 1A
             rooms.add(new Room("Room 2A",true,300));
             rooms.get(1).setAvailable(true);
-            rooms.get(1).setPictureUrl("sample/Room2A.jpg"); //Set Picture URL
+            rooms.get(1).setPictureUrl("sample/Pictures/Room2A.jpg"); //Set Picture URL
             rooms.add(new Room("Room 3A",false,500));
             rooms.get(2).setAvailable(false);
             rooms.get(2).setOccupiedGuest(new Guest("ClarkKent","superman"));//John Doe occupies room 1A
-            rooms.get(2).setPictureUrl("sample/Room3A.jpg"); //Set Picture URL
+            rooms.get(2).setPictureUrl("sample/Pictures/Room3A.jpg"); //Set Picture URL
         }
 
 
