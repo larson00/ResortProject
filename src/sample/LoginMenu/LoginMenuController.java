@@ -40,19 +40,22 @@ import sample.Room;
  * Notes
  * Chck the text file of fxml files, they will sometimes have redtext/eerors which IDEA IDE will not tell you
  * Make sure there no java.awt as it will case Errors
- *
+ * This classes was foremly named FXMLCONTROLLER.java
  *
  * LoginMenuController.java
  * Notes by:pPetit
  * This is bascially the "main" of the project.
- * This houses the login screen: Guest Login and Maanager Login
- * To login to guest, you  have to enter a Username and Password and press Create Button
- * That will invoke a method that creates a guest class, with the inputs the user did
- * Then Guest can login, Usernames arent case senesitves but passwords are
+ * This houses the login screen: Guest Login and Manager Login and also Signup Login
+ * Signup Login opens a new window where you can can create a new account, firsttime users do this.
+ * To login to guest, you  have to enter a Username and Password, it has to match a created Account first.
+ * Usernames aren't case sensitive but passwords are.
  *
  * For Manager: The default Login in U: Nicolo P: Martina
- * Same case sentivity,
+ * Same case sensitivity,
  * For extra functionality, you can show/hide passwords.
+ * There is also a toggle for show Password Field on both Manager and Guest.
+ * This code is done by having a password txtfield and a regular txtfield in the same place and making thme hidden.
+ * See more in the initialize portion.
  *
  */
 
@@ -63,6 +66,11 @@ import sample.Room;
  */
 
 public class LoginMenuController extends Controller implements Initializable {
+
+  /**
+   * Every Controller should have the fields it uses on the top.
+   * It can update its current data in it's constructor, or in some cases initialize.
+   */
    // private ArrayList<String> usernameList = new ArrayList<>(); //ArrayList of username Fields
    private ArrayList<String> usernameList;
   // private ArrayList<String> usernameList =super.getUsernameList();
@@ -83,7 +91,13 @@ public class LoginMenuController extends Controller implements Initializable {
     }
 
     private void updateGlobal(){
-      Global.currentGuestLoggedIn = currentGuest;
+      /**
+       * UpdateGlobal is a method to change the Global class's values
+       * ArrayLists seem to update automically if you make a copy of them
+       * but Strings and Ints dont, so before moving to a new window you need to update Global Values
+       *
+       */
+      Global.currentGuestLoggedIn = currentGuest; //Needed so GuestMenu knows who logged in.
     }
 
 @FXML
@@ -97,7 +111,7 @@ private CheckBox checkBox; //CheckBo for handling showPassword
        * the same data.
        */
       //
-
+     //These are done in initialize
 //    this.usernameList = Global.usernameList;
 //    this.passwordList = Global.passwordList;
 //    this.guestList = Global.guestList;
@@ -143,15 +157,16 @@ private CheckBox checkBox; //CheckBo for handling showPassword
       /**
        * Simple Process
        * First Close the Window
-       * Create A object of the new Controller Class
-       * store Data,arraylists in that controllerclass's constructor
-       * Then Open the fxml File
+       * Then we get the url of the next FXML/Window from the global WindowLocation Enum
+       * Open the new FXML
        * When the new window is opened the data is stored.
        *
+       * Some window calls are different because some of them have have thier Controllers linked to
+       * FXML file, and other dont
+       * In this case GUESTMENUHOME's controller is linked to FXML.
        */
-      System.out.println();
       currentGuest = g1;
-      updateGlobal();
+      updateGlobal(); //Update Global variable so next window's fields are up to date.
       Stage stage = (Stage) buttonCreate.getScene().getWindow(); //Asks a object in the window to store it's WindowID
             stage.close(); //Close current Window
 
@@ -162,7 +177,7 @@ private CheckBox checkBox; //CheckBo for handling showPassword
       //load the url you just acquired.
       Loader.setLocation(getClass().getResource(url));
       try {
-        // Loader.setController(guestController);
+        // Loader.setController(guestController); GuestMenuHome already has a controller so no need to set a new one.
         Loader.load(); //Loads
       }catch ( IOException ex){
         Logger.getLogger(GuestMenuController.class.getName()).log(Level.SEVERE, null ,ex);
@@ -202,7 +217,7 @@ private CheckBox checkBox; //CheckBo for handling showPassword
                 //now check password
                 if (g1.getPassword().equals(passwordSent)){
                     try {
-
+                      //Both Username and Password match now to open Guest Menu
                         openGuestMenu(g1); //Open Guest Menu, send g1
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -217,6 +232,7 @@ private CheckBox checkBox; //CheckBo for handling showPassword
 
 
         }
+        //Make a Label for this?
         if (isNameCorrect == false && isPasswordCorrect == false){
             System.out.println("Error, login credentials not found");
         }else if (isNameCorrect==true && isPasswordCorrect== false){
@@ -313,11 +329,6 @@ private CheckBox checkBox; //CheckBo for handling showPassword
 
 
 
-    @FXML
-    void extraFunction(ActionEvent event){
-        //System.out.println("BLAH"); Cant remember what this is for
-
-    }
 
     @FXML
     void handleButtonExit(ActionEvent event) {
@@ -457,7 +468,7 @@ private CheckBox checkBox; //CheckBo for handling showPassword
      * This method is called first when FXMLDOCUEMENTCONTROLLER IS opened.
      * It will set the properties for passwordFields to able to show/hide
      *
-     * And also it will take the data of Global class so data stays consistent.
+     * And also it will take the data of Global class so data stays consistent between Controllers.
      */
     this.usernameList = Global.usernameList;
     this.passwordList = Global.passwordList;
@@ -513,6 +524,10 @@ private CheckBox checkBox; //CheckBo for handling showPassword
 
   @FXML
     void handleButtonCreate(ActionEvent event){
+    /**
+     * Will be deleted and changed to the signupWindow
+     *
+     */
         txtfieldUsername.requestFocus(); //Can be used if user entered something wrong
         txtfieldUsername.selectAll();//Highlights the text so user can easily fix it wiothut mouse click
         String field1, field2;

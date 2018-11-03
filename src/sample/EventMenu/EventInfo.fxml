@@ -13,6 +13,6 @@
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="280.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="380.0" layoutY="344.0" mnemonicParsing="false" text="ExitButton" />
       <Label layoutX="53.0" layoutY="31.0" text="Info Information:" />
-      <Label layoutX="416.0" layoutY="22.0" text="Picture of Event/Venue" />
+      <Label layoutX="416.0" layoutY="22.0" text="Picture of sample.Event/Venue" />
    </children>
 </AnchorPane>

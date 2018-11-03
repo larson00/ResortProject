@@ -11,6 +11,6 @@
       <ListView layoutX="39.0" layoutY="91.0" prefHeight="200.0" prefWidth="200.0" />
       <Label layoutX="45.0" layoutY="59.0" text="List of Sponsered Events" />
       <Button layoutX="74.0" layoutY="325.0" mnemonicParsing="false" text="More Info." />
-      <Button layoutX="187.0" layoutY="325.0" mnemonicParsing="false" text="Create your own Event" />
+      <Button layoutX="187.0" layoutY="325.0" mnemonicParsing="false" text="Create your own sample.Event" />
    </children>
 </AnchorPane>
