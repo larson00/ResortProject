@@ -21,8 +21,8 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="215.0" prefWidth="200.0">
                      <children>
-                        <TextField id="UserTextField" fx:id="textfieldUsername" layoutX="103.0" layoutY="110.0" prefHeight="25.0" prefWidth="174.0" />
-                        <PasswordField fx:id="passwordField" layoutX="103.0" layoutY="144.0" />
+                        <TextField id="UserTextField" fx:id="textfieldUsername" layoutX="103.0" layoutY="110.0" prefHeight="25.0" prefWidth="174.0" promptText="ex: &quot;alexjordan12&quot;" />
+                        <PasswordField fx:id="passwordField" layoutX="103.0" layoutY="144.0" promptText="ex: &quot;openSeasme&quot;" />
                           <Button id="LoginButton" fx:id="buttonLogin" layoutX="133.0" layoutY="215.0" onAction="#handleButtonLogin" prefHeight="25.0" prefWidth="53.0" text="Login" />
                           <Label fx:id="labelLoginSuccess" layoutX="18.0" layoutY="171.0" minHeight="16" minWidth="69" prefHeight="41.0" prefWidth="145.0" wrapText="true" />
                         <Text layoutX="43.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
@@ -40,7 +40,7 @@
                         </Text>
                         <Button fx:id="buttonCreate" layoutX="250.0" layoutY="251.0" mnemonicParsing="false" onAction="#handleButtonCreate" text="Create" />
                         <CheckBox fx:id="checkBox" alignment="CENTER" contentDisplay="BOTTOM" layoutX="168.0" layoutY="179.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="Show Password?" textAlignment="JUSTIFY" />
-                        <TextField fx:id="textFieldForPassword" focusTraversable="false" layoutX="103.0" layoutY="144.0" visible="false" />
+                        <TextField fx:id="textFieldForPassword" focusTraversable="false" layoutX="103.0" layoutY="144.0" promptText="ex: &quot;openseame12&quot;" visible="false" />
                         <Label layoutX="89.0" layoutY="273.0" text="No Account? Please Click Signup!" />
                      </children>
                   </AnchorPane>

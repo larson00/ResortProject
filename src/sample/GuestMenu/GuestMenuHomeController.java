@@ -50,28 +50,8 @@ Button buttonBookRoom,buttonEvent,buttonAccount,buttonSettings,buttonExit,button
 @FXML
 void handleExit(ActionEvent event){
   Stage stage = (Stage) buttonExit.getScene().getWindow(); //Asks a object in the window to store it's WindowID
-  stage.close(); //Close current Window
 
-  //Loads FXML Loader
-  FXMLLoader Loader = new FXMLLoader();
-  //Using Global's Enum named WindowLocation get the Url for the EnumType
-
-  //load the url you just acquired.
-  String url = WindowLocation.LOGINMENU.getLocation();
-  Loader.setLocation(getClass().getResource(url));
-  try {
-    // Loader.setController(guestController); GuestMenuHome already has a controller so no need to set a new one.
-    Loader.load(); //Loads
-  }catch ( IOException ex){
-    Logger.getLogger(GuestRoomController.class.getName()).log(Level.SEVERE, null ,ex);
-
-  }
-
-  Parent p = Loader.getRoot();
-  stage = new Stage();
-  stage.setTitle("Login");
-  stage.setScene(new Scene(p));
-  stage.show(); //Opens new Window
+  new Global().openNewWindow(WindowLocation.LOGINMENU);
 }
 
   @FXML

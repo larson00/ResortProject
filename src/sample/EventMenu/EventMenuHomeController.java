@@ -1,5 +1,15 @@
 package sample.EventMenu;
 
+/**
+ * EventMenuHomeController.java
+ * This controllers allows user to see the events made by Manager
+ * the lsit view shows Events created by the manager
+ * Guests can also create their event, but they arent public to all users
+ * This controlls has a lsitView, and a combobox for sorting by type (This can be used in other controllers
+ *
+ *
+ */
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -91,8 +101,11 @@ public class EventMenuHomeController implements Initializable {
 
   @FXML
   void handleSort(ActionEvent event){
+    /**
+     * May delete this method
+     */
     //listViewEvent.itemsProperty().bind(listProperty);
-    sortList= showOnlyType(events,Spa.class);
+    sortList= showOnlyType(events,Spa.class); //alls showOnlyType so it only shows objects of Spa class
 
     listProperty.set(FXCollections.observableArrayList(sortList));
     listViewEvent.setCellFactory(new EventCellFactory()); //Cell Factory allows formatting
@@ -102,6 +115,11 @@ public class EventMenuHomeController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     if (events.isEmpty()) {
+      /**
+       * This is called first before the window is shown
+       * use this to initalize class variables so they are equal to global
+       *
+       */
       //No events make a default list
       Event createEvent = new Event("Royal Ball");
       events.add(createEvent);
@@ -114,17 +132,17 @@ public class EventMenuHomeController implements Initializable {
       events.add(new Meeting("Meeting event"));
       events.add(new Spa("Spa event 2"));
 
-      listViewEvent.itemsProperty().bind(listProperty);
-      listProperty.set(FXCollections.observableArrayList(events));
+      listViewEvent.itemsProperty().bind(listProperty); //Bind a list property to listview
+      listProperty.set(FXCollections.observableArrayList(events)); //Set the elements in the list
       listViewEvent.setCellFactory(new EventCellFactory()); //Cell Factory allows formatting
       ArrayList<Event> listofElements = new ArrayList<>();
       listofElements.add(new Spa("ShowSpa"));
       listofElements.add(new Meeting("ShowMeeting"));
       listofElements.add(new Wedding("showweeding"));
      // comboBoxSort.setItems(listProperty2);
-      comboBoxSort.itemsProperty().bind(listProperty2);
-      listProperty2.set(FXCollections.observableArrayList(listofElements));
-      comboBoxSort.setCellFactory(new EventCellFactory());
+      comboBoxSort.itemsProperty().bind(listProperty2); //Bind a list property to the combobox
+      listProperty2.set(FXCollections.observableArrayList(listofElements)); //Add a list to the combobox
+      comboBoxSort.setCellFactory(new EventCellFactory());/// allows cells to be formatted
 
     }
     //listViewEvent.setItems(buttonCreate);

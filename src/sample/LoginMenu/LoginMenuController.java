@@ -62,6 +62,8 @@ import sample.Room;
  * This code is done by having a password txtfield and a regular txtfield in the same place and making thme hidden.
  * See more in the initialize portion.
  *
+ * There is also a function that will populate the username Field automically if the user creates a new Account
+ *
  */
 
 
@@ -106,7 +108,7 @@ public class LoginMenuController extends Controller implements Initializable {
     }
 
 @FXML
-private CheckBox checkBox; //CheckBo for handling showPassword
+private CheckBox checkBox; //CheckBo for handling showPassword for guest login
 
 
 //  public void displayPopUpWindow(String message){
@@ -196,7 +198,8 @@ private CheckBox checkBox; //CheckBo for handling showPassword
         boolean isNameCorrect=false;
         boolean isPasswordCorrect=false;
 
-       guestList.add(new Guest(usernameSent,passwordSent));
+       guestList.add(new Guest(usernameSent,passwordSent));// Delete this to allow checking for login
+      //right now we arent validating inputs
         for (Guest g1: getGuestList()) {
 
             if(g1.getUserName().equalsIgnoreCase(usernameSent)){
@@ -331,6 +334,9 @@ private CheckBox checkBox; //CheckBo for handling showPassword
 
     @FXML
     void handleButtonLogin(ActionEvent event) {
+      /**
+       * Handles login for guest
+       */
 
         String field1, field2;//Declare Strings
         field1 = textfieldUsername.getText();//Store what in txtField Username into field1
@@ -354,7 +360,7 @@ private CheckBox checkBox; //CheckBo for handling showPassword
     @FXML
     void handleButtonLoginManager(ActionEvent event){
       //see HandleButtonLogin for guests, basically same code
-        System.out.println("MAngaer");
+        System.out.println("Managaer");
         boolean isNameCorrect=false;
         boolean isPasswordCorrect=false;
         String field1, field2;
@@ -399,7 +405,7 @@ private CheckBox checkBox; //CheckBo for handling showPassword
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     /**
-     * This method is called first when FXMLDOCUEMENTCONTROLLER IS opened.
+     * This method is called first when LoginMenu IS opened.
      * It will set the properties for passwordFields to able to show/hide
      * In SceneBuilder I made a textfield adn a password field on the same spot, the user won't notice
      * the difference.
@@ -477,7 +483,8 @@ private CheckBox checkBox; //CheckBo for handling showPassword
   @FXML
     void handleButtonCreate(ActionEvent event){
     /**
-     * Will be deleted and changed to the signupWindow
+     *
+     *Sets a default list of guests, and also calls signupScreen Window
      *
      */
 //        textfieldUsername.requestFocus(); //Can be used if user entered something wrong
@@ -504,7 +511,8 @@ private CheckBox checkBox; //CheckBo for handling showPassword
     //    currentGuest= getGuestList().get(1);
 
 
-    Global.currentScene = buttonExit1.getScene();//
+    Global.currentScene = buttonExit1.getScene();//Sets the current Scene for Global Class, so it know
+    //what window to close
 
     new Global().openNewWindow(WindowLocation.SIGNUP); //Open new SignupScreen window
 
