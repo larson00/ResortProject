@@ -67,7 +67,7 @@ import sample.Room.RoomCellFactory;
  * FXML Controller class
  *
  * ManagerMenuConroller.java
- * Notes by: pPetit
+ * Notes by: pPetitFrere
  *
  * Manager Window Probably Most Important
  * Manager Can:
