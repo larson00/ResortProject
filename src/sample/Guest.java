@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Maybe it should be called GuestAccount.
  * Guest is a subclass of the Abstract class User.
  * Guest store the information a guest user inputs when they create a account.
- * Guests will be able to view Rooms, Book a Room, View Events, Book Event and if time allows be able to change Settings
+ * Guests will be able to view Rooms, Book a Room, View Events, Book MyEvent and if time allows be able to change Settings
  *
  */
 
@@ -15,7 +15,7 @@ public class Guest extends User {
   private String firstName;
   private String lastName;
   private String dateOfBirth; //Format of MM/DD/YY, Actually might stick to Year for simplciity.
-  private ArrayList<Event> eventsCreated = new ArrayList<>();
+  private ArrayList<MyEvent> eventsCreated = new ArrayList<>();
   private int guestId;
   private static int guestIds; //This increments as new guest accounts are created
   private Room roomRented;
@@ -44,11 +44,11 @@ public class Guest extends User {
     this.dateOfBirth = dateOfBirth;
   }
 
-  public ArrayList<Event> getEventsCreated() {
+  public ArrayList<MyEvent> getEventsCreated() {
     return eventsCreated;
   }
 
-  public void setEventsCreated(ArrayList<Event> eventsCreated) {
+  public void setEventsCreated(ArrayList<MyEvent> eventsCreated) {
     this.eventsCreated = eventsCreated;
   }
 

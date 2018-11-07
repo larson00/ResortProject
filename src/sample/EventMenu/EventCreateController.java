@@ -5,10 +5,12 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
@@ -17,41 +19,76 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javax.xml.ws.Action;
+import sample.Global;
+import sample.Global.WindowLocation;
+import sample.MyEvent;
 
 /**
- * Create event
- * Select Wedding, Spa, Meeting, Other
- * Name of Person
- * Dates
- * How many people are coming
- * Special Accomendation
- * Contact Info (
- * Email Address
+ * Create event Select Wedding, Spa, Meeting, Other Name of Person Dates How many people are coming
+ * Special Accomendation Contact Info ( Email Address
  *
- * Pick a Venue (Show Pictures)
- * DropDown Of Venue
+ * Pick a Venue (Show Pictures) DropDown Of Venue
  *
  * Buy
- *
- *
- *
- *
- *
  */
 
-public class EventCreateController  implements Initializable {
-  @FXML private DatePicker checkInDatePicker;
-  @FXML private DatePicker checkOutDatePicker;
-  @FXML private Button b1;
+public class EventCreateController implements Initializable {
 
-  @FXML void b12(ActionEvent event){
+  ArrayList<MyEvent> myEvents = new ArrayList<>();
+
+  @FXML
+  private DatePicker checkInDatePicker;
+  @FXML
+  private DatePicker checkOutDatePicker;
+  @FXML
+  private Button b1;
+
+  @FXML
+  TextField nameOfOrganization, numOfPeople, nameOfEvent, selectVendor, otherDetails;
+
+  @FXML
+  void handleEventButton(ActionEvent event) {
     //These 3 lines give week of year.
+    // 5 Strings for the 5 buttons in Plan event
+    // Check for typos between sceneBuilder
+    String nameOrg, nameEvent, numPeople, details, vendor;
+    // creating strings that get the data from the text fields
+    vendor = selectVendor.getText();
+    details = otherDetails.getText();
+    nameOrg = nameOfOrganization.getText();
+    nameEvent = nameOfEvent.getText();
+    numPeople = numOfPeople.getText();
+//    nameOrg = "hi phil";
+//    nameEvent = "im programming";
+//    numPeople ="rr";
+
+    // creates an object that uses the text fields data
+    MyEvent eventNew = new MyEvent(nameOrg, nameEvent, numPeople, details, vendor);
+    System.out
+        .println(eventNew.getNumOfPeople() + '\n' + eventNew.getNameOfEvent() + '\n' +
+            eventNew.getNameOfOrg() + '\n' +
+            eventNew.getOtherDetails() + '\n' + eventNew.getSelectVendor());
+    // Prints the create objects
+    // Adds the events to the arraylist of events
+    myEvents.add(eventNew);
+
+    for (MyEvent event1 : myEvents ) {
+      //Prints from the arrayList
+      System.out.println(event1.getNameOfOrg());
+    }
+    // Stores the data to Global class
+    Global.myEvents = myEvents;
+    Global.currentScene = nameOfOrganization.getScene();
+
+    // Opens a new window
+    new Global().openNewWindow(WindowLocation.EVENTMENUHOME);
 
 
   }
@@ -63,7 +100,6 @@ public class EventCreateController  implements Initializable {
 //    checkInDatePicker = new DatePicker();
 //    checkOutDatePicker = new DatePicker();
     checkInDatePicker.setValue(LocalDate.now());
-
 
     final Callback<DatePicker, DateCell> dayCellFactory =
         new Callback<DatePicker, DateCell>() {
@@ -89,7 +125,6 @@ public class EventCreateController  implements Initializable {
                 );
 
 
-
               }
             };
           }
@@ -102,12 +137,11 @@ public class EventCreateController  implements Initializable {
               @Override
               public void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
-                if (checkOutDatePicker.getValue().isBefore(checkInDatePicker.getValue()) ){
+                if (checkOutDatePicker.getValue().isBefore(checkInDatePicker.getValue())) {
                   System.out.println("...K");
                   //checkInDatePicker.setFocusTraversable(true);
                   checkOutDatePicker.requestFocus();
                   //Maybe set an error Boolean?
-
 
                 }
 
@@ -123,7 +157,7 @@ public class EventCreateController  implements Initializable {
     LocalDate date = LocalDate.now();
     TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
     int weekNumber = date.get(woy);
-    System.out.println(weekNumber+"\n\n\n");
+    System.out.println(weekNumber + "\n\n\n");
 
     checkOutDatePicker.setDayCellFactory(dayCellFactory);
     checkInDatePicker.setDayCellFactory(dayCellFactory2);
@@ -144,13 +178,12 @@ public class EventCreateController  implements Initializable {
 
 //  private Stage stage;
 
-
 //  public static void main(String[] args) {
 //    Locale.setDefault(Locale.US);
 //    launch(args);
 //  }
 
- // @Override
+  // @Override
 //  public void start(Stage stage) {
 ////    this.stage = stage;
 ////    stage.setTitle("DatePickerSample ");
@@ -162,7 +195,7 @@ public class EventCreateController  implements Initializable {
 //    VBox vbox = new VBox(20);
 //    vbox.setStyle("-fx-padding: 10;");
 //    Scene scene = new Scene(vbox, 400, 400);
-   // stage.setScene(scene);
+    // stage.setScene(scene);
 
   }
 }

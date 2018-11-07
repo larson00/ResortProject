@@ -20,7 +20,7 @@
   </rowConstraints>
    <children>
       <Button fx:id="bookRoomButton" mnemonicParsing="false" onAction="#handleBookRoom" text="Book Room" GridPane.rowIndex="2" />
-      <Button mnemonicParsing="false" text="sample.Event Menu" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Button mnemonicParsing="false" text="sample.MyEvent Menu" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Button mnemonicParsing="false" text="Calender" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <Button mnemonicParsing="false" text="Settings" GridPane.rowIndex="3" />
       <Button mnemonicParsing="false" text="See Account Information" GridPane.columnIndex="1" GridPane.rowIndex="3" />

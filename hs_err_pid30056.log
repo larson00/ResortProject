@@ -115,7 +115,7 @@ Java Threads: ( => current thread )
   0x0000000019a48000 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=33180, stack(0x0000000019e70000,0x0000000019f70000)]
   0x00000000199ec000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=32072, stack(0x0000000019d70000,0x0000000019e70000)]
   0x000000001804b000 JavaThread "JDWP Command Reader" daemon [_thread_in_native, id=32640, stack(0x0000000019870000,0x0000000019970000)]
-  0x0000000018047800 JavaThread "JDWP sample.Event Helper Thread" daemon [_thread_blocked, id=30700, stack(0x0000000019770000,0x0000000019870000)]
+  0x0000000018047800 JavaThread "JDWP sample.MyEvent Helper Thread" daemon [_thread_blocked, id=30700, stack(0x0000000019770000,0x0000000019870000)]
   0x0000000018039800 JavaThread "JDWP Transport Listener: dt_socket" daemon [_thread_blocked, id=32792, stack(0x0000000019670000,0x0000000019770000)]
   0x000000001802d800 JavaThread "Attach Listener" daemon [_thread_blocked, id=23772, stack(0x0000000019570000,0x0000000019670000)]
   0x000000000353e000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=29952, stack(0x0000000019470000,0x0000000019570000)]
@@ -156,60 +156,60 @@ CodeCache: size=245760Kb used=3184Kb max_used=3188Kb free=242575Kb
  compilation: enabled
 
 Compilation events (10 events):
-sample.Event: 170.899 Thread 0x0000000019a4a800  808       1       javafx.scene.Node::getStyleClass (5 bytes)
-sample.Event: 170.899 Thread 0x0000000019a4a800 nmethod 808 0x000000000385ce90 code [0x000000000385cfe0, 0x000000000385d0f0]
-sample.Event: 492.987 Thread 0x0000000019a4a800  809       3       java.util.AbstractList$Itr::<init> (6 bytes)
-sample.Event: 492.988 Thread 0x0000000019a4a800 nmethod 809 0x000000000385c990 code [0x000000000385cb00, 0x000000000385cd50]
-sample.Event: 543.120 Thread 0x0000000019a4a800  810       3       javafx.beans.property.StringPropertyBase::get (32 bytes)
-sample.Event: 543.120 Thread 0x0000000019a4a800 nmethod 810 0x000000000385c3d0 code [0x000000000385c540, 0x000000000385c8a8]
-sample.Event: 543.166 Thread 0x0000000019a4a800  811       3       javafx.beans.property.StringPropertyBase::get (5 bytes)
-sample.Event: 543.166 Thread 0x0000000019a4a800 nmethod 811 0x000000000385bf90 code [0x000000000385c100, 0x000000000385c328]
-sample.Event: 581.195 Thread 0x0000000019a4a800  812       3       javafx.scene.Node::getId (22 bytes)
-sample.Event: 581.195 Thread 0x0000000019a4a800 nmethod 812 0x000000000385b9d0 code [0x000000000385bb40, 0x000000000385bea8]
+sample.MyEvent: 170.899 Thread 0x0000000019a4a800  808       1       javafx.scene.Node::getStyleClass (5 bytes)
+sample.MyEvent: 170.899 Thread 0x0000000019a4a800 nmethod 808 0x000000000385ce90 code [0x000000000385cfe0, 0x000000000385d0f0]
+sample.MyEvent: 492.987 Thread 0x0000000019a4a800  809       3       java.util.AbstractList$Itr::<init> (6 bytes)
+sample.MyEvent: 492.988 Thread 0x0000000019a4a800 nmethod 809 0x000000000385c990 code [0x000000000385cb00, 0x000000000385cd50]
+sample.MyEvent: 543.120 Thread 0x0000000019a4a800  810       3       javafx.beans.property.StringPropertyBase::get (32 bytes)
+sample.MyEvent: 543.120 Thread 0x0000000019a4a800 nmethod 810 0x000000000385c3d0 code [0x000000000385c540, 0x000000000385c8a8]
+sample.MyEvent: 543.166 Thread 0x0000000019a4a800  811       3       javafx.beans.property.StringPropertyBase::get (5 bytes)
+sample.MyEvent: 543.166 Thread 0x0000000019a4a800 nmethod 811 0x000000000385bf90 code [0x000000000385c100, 0x000000000385c328]
+sample.MyEvent: 581.195 Thread 0x0000000019a4a800  812       3       javafx.scene.Node::getId (22 bytes)
+sample.MyEvent: 581.195 Thread 0x0000000019a4a800 nmethod 812 0x000000000385b9d0 code [0x000000000385bb40, 0x000000000385bea8]
 
 GC Heap History (0 events):
 No events
 
 Deoptimization events (6 events):
-sample.Event: 0.900 Thread 0x0000000003443800 Uncommon trap: reason=null_check action=make_not_entrant pc=0x000000000365f2b4 method=java.lang.String.equals(Ljava/lang/Object;)Z @ 8
-sample.Event: 1.137 Thread 0x0000000003443800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000003703f38 method=java.lang.String.replace(CC)Ljava/lang/String; @ 26
-sample.Event: 4.469 Thread 0x000000001a3aa800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000000000372a930 method=java.lang.String.indexOf([CII[CIII)I @ 134
-sample.Event: 4.650 Thread 0x000000001a3aa800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000000037d36a8 method=java.io.BufferedInputStream.read()I @ 8
-sample.Event: 4.676 Thread 0x000000001a3aa800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000000037b364c method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 84
-sample.Event: 4.676 Thread 0x000000001a3aa800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000000037acb58 method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 84
+sample.MyEvent: 0.900 Thread 0x0000000003443800 Uncommon trap: reason=null_check action=make_not_entrant pc=0x000000000365f2b4 method=java.lang.String.equals(Ljava/lang/Object;)Z @ 8
+sample.MyEvent: 1.137 Thread 0x0000000003443800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000003703f38 method=java.lang.String.replace(CC)Ljava/lang/String; @ 26
+sample.MyEvent: 4.469 Thread 0x000000001a3aa800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000000000372a930 method=java.lang.String.indexOf([CII[CIII)I @ 134
+sample.MyEvent: 4.650 Thread 0x000000001a3aa800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000000037d36a8 method=java.io.BufferedInputStream.read()I @ 8
+sample.MyEvent: 4.676 Thread 0x000000001a3aa800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000000037b364c method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 84
+sample.MyEvent: 4.676 Thread 0x000000001a3aa800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000000037acb58 method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 84
 
 Classes redefined (7 events):
-sample.Event: 108.999 Thread 0x0000000017ff8000 redefined class name=sample.FXMLDocumentController, count=1
-sample.Event: 164.554 Thread 0x0000000017ff8000 redefined class name=sample.FXMLDocumentController, count=2
-sample.Event: 391.246 Thread 0x0000000017ff8000 redefined class name=sample.FXMLDocumentController, count=3
-sample.Event: 492.167 Thread 0x0000000017ff8000 redefined class name=sample.FXMLDocumentController, count=4
-sample.Event: 541.985 Thread 0x0000000017ff8000 redefined class name=sample.FXMLDocumentController, count=5
-sample.Event: 579.344 Thread 0x0000000017ff8000 redefined class name=sample.FXMLDocumentController, count=6
-sample.Event: 787.205 Thread 0x0000000017ff8000 redefined class name=sample.FXMLDocumentController, count=7
+sample.MyEvent: 108.999 Thread 0x0000000017ff8000 redefined class name=sample.FXMLDocumentController, count=1
+sample.MyEvent: 164.554 Thread 0x0000000017ff8000 redefined class name=sample.FXMLDocumentController, count=2
+sample.MyEvent: 391.246 Thread 0x0000000017ff8000 redefined class name=sample.FXMLDocumentController, count=3
+sample.MyEvent: 492.167 Thread 0x0000000017ff8000 redefined class name=sample.FXMLDocumentController, count=4
+sample.MyEvent: 541.985 Thread 0x0000000017ff8000 redefined class name=sample.FXMLDocumentController, count=5
+sample.MyEvent: 579.344 Thread 0x0000000017ff8000 redefined class name=sample.FXMLDocumentController, count=6
+sample.MyEvent: 787.205 Thread 0x0000000017ff8000 redefined class name=sample.FXMLDocumentController, count=7
 
 Internal exceptions (10 events):
-sample.Event: 0.859 Thread 0x0000000003443800 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d6536748) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\prims\jvm.cpp, line 1435]
-sample.Event: 0.859 Thread 0x0000000003443800 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d6536958) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\prims\jvm.cpp, line 1435]
-sample.Event: 0.867 Thread 0x0000000003443800 Exception <a 'java/lang/NullPointerException'> (0x00000000d6538f50) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\interpreter\linkResolver.cpp, line 1185]
-sample.Event: 0.900 Thread 0x0000000003443800 Implicit null exception at 0x000000000365f01a to 0x000000000365f2a5
-sample.Event: 4.240 Thread 0x000000001a3aa800 Exception <a 'java/lang/NullPointerException'> (0x00000000d72f4b28) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\interpreter\linkResolver.cpp, line 1185]
-sample.Event: 4.240 Thread 0x000000001a3aa800 Exception <a 'java/lang/NullPointerException'> (0x00000000d72f4b28) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\prims\jvm.cpp, line 1439]
-sample.Event: 4.763 Thread 0x000000001a3aa800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000d78f90f0) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\runtime\sharedRuntime.cpp, line 605]
-sample.Event: 4.764 Thread 0x000000001a3aa800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000d78fb6a8) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\runtime\sharedRuntime.cpp, line 605]
-sample.Event: 4.764 Thread 0x000000001a3aa800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000d78fd550) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\runtime\sharedRuntime.cpp, line 605]
-sample.Event: 4.877 Thread 0x000000001a3aa800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000d7bf2510) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\runtime\sharedRuntime.cpp, line 605]
+sample.MyEvent: 0.859 Thread 0x0000000003443800 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d6536748) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\prims\jvm.cpp, line 1435]
+sample.MyEvent: 0.859 Thread 0x0000000003443800 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d6536958) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\prims\jvm.cpp, line 1435]
+sample.MyEvent: 0.867 Thread 0x0000000003443800 Exception <a 'java/lang/NullPointerException'> (0x00000000d6538f50) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\interpreter\linkResolver.cpp, line 1185]
+sample.MyEvent: 0.900 Thread 0x0000000003443800 Implicit null exception at 0x000000000365f01a to 0x000000000365f2a5
+sample.MyEvent: 4.240 Thread 0x000000001a3aa800 Exception <a 'java/lang/NullPointerException'> (0x00000000d72f4b28) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\interpreter\linkResolver.cpp, line 1185]
+sample.MyEvent: 4.240 Thread 0x000000001a3aa800 Exception <a 'java/lang/NullPointerException'> (0x00000000d72f4b28) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\prims\jvm.cpp, line 1439]
+sample.MyEvent: 4.763 Thread 0x000000001a3aa800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000d78f90f0) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\runtime\sharedRuntime.cpp, line 605]
+sample.MyEvent: 4.764 Thread 0x000000001a3aa800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000d78fb6a8) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\runtime\sharedRuntime.cpp, line 605]
+sample.MyEvent: 4.764 Thread 0x000000001a3aa800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000d78fd550) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\runtime\sharedRuntime.cpp, line 605]
+sample.MyEvent: 4.877 Thread 0x000000001a3aa800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000d7bf2510) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u181\11358\hotspot\src\share\vm\runtime\sharedRuntime.cpp, line 605]
 
 Events (10 events):
-sample.Event: 788.473 Executing VM operation: ForceSafepoint done
-sample.Event: 788.490 Executing VM operation: ForceSafepoint
-sample.Event: 788.490 Executing VM operation: ForceSafepoint done
-sample.Event: 1439.397 Executing VM operation: ChangeBreakpoints
-sample.Event: 1439.397 Executing VM operation: ChangeBreakpoints done
-sample.Event: 1439.414 Executing VM operation: ChangeBreakpoints
-sample.Event: 1439.414 Executing VM operation: ChangeBreakpoints done
-sample.Event: 1439.439 Executing VM operation: ChangeBreakpoints
-sample.Event: 1439.440 Executing VM operation: ChangeBreakpoints done
-sample.Event: 1473.390 Executing VM operation: GetOrSetLocal
+sample.MyEvent: 788.473 Executing VM operation: ForceSafepoint done
+sample.MyEvent: 788.490 Executing VM operation: ForceSafepoint
+sample.MyEvent: 788.490 Executing VM operation: ForceSafepoint done
+sample.MyEvent: 1439.397 Executing VM operation: ChangeBreakpoints
+sample.MyEvent: 1439.397 Executing VM operation: ChangeBreakpoints done
+sample.MyEvent: 1439.414 Executing VM operation: ChangeBreakpoints
+sample.MyEvent: 1439.414 Executing VM operation: ChangeBreakpoints done
+sample.MyEvent: 1439.439 Executing VM operation: ChangeBreakpoints
+sample.MyEvent: 1439.440 Executing VM operation: ChangeBreakpoints done
+sample.MyEvent: 1473.390 Executing VM operation: GetOrSetLocal
 
 
 Dynamic libraries:

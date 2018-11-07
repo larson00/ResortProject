@@ -10,7 +10,7 @@
    <children>
       <ListView fx:id="listViewEvent" layoutX="39.0" layoutY="91.0" prefHeight="200.0" prefWidth="200.0" />
       <Label layoutX="45.0" layoutY="59.0" text="List of Sponsered Events" />
-      <Button layoutX="74.0" layoutY="325.0" mnemonicParsing="false" text="More Info." />
+      <Button fx:id="moreInfo" layoutX="74.0" layoutY="325.0" mnemonicParsing="false" onAction="#handleInfo" text="More Info." />
       <Button fx:id="buttonCreate" layoutX="187.0" layoutY="325.0" mnemonicParsing="false" onAction="#handleCreate" text="Plan a Event" />
       <Button fx:id="buttonSort" layoutX="288.0" layoutY="325.0" mnemonicParsing="false" onAction="#handleSort" text="Show Spas" />
       <Button fx:id="buttonResetList" layoutX="372.0" layoutY="325.0" mnemonicParsing="false" onAction="#handleRestoreList" text="Reset List" />

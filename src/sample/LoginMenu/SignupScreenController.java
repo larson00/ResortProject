@@ -108,6 +108,7 @@ public class SignupScreenController implements Initializable {
 
   @FXML
   void handleSubmit(ActionEvent event){
+
     String userName, password,firstName,lastName,dob;
     userName = textFieldUserName.getText();
     password = passwordField.getText();

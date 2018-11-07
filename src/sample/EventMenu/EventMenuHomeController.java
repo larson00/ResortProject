@@ -2,7 +2,7 @@ package sample.EventMenu;
 
 /**
  * EventMenuHomeController.java
- * This controllers allows user to see the events made by Manager
+ * This controllers allows user to see the myEvents made by Manager
  * the lsit view shows Events created by the manager
  * Guests can also create their event, but they arent public to all users
  * This controlls has a lsitView, and a combobox for sorting by type (This can be used in other controllers
@@ -11,57 +11,52 @@ package sample.EventMenu;
  */
 
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-import javafx.stage.Stage;
-import sample.Event;
-import sample.Event.EventCellFactory;
+import sample.MyEvent;
+import sample.MyEvent.EventCellFactory;
 import sample.Global;
 import sample.Global.WindowLocation;
-import sample.GuestMenu.GuestRoomController;
 import sample.Meeting;
-import sample.Room;
 import sample.Spa;
 import sample.Wedding;
 
 public class EventMenuHomeController implements Initializable {
 
-  ArrayList<Event> events = new ArrayList<>();
-  static ArrayList<Event> sortList = new ArrayList<>();
+  ArrayList<MyEvent> myEvents = new ArrayList<>();
+  static ArrayList<MyEvent> sortList = new ArrayList<>();
 
   @FXML
-  Button buttonCreate, buttonSort,buttonResetList;
+  Button buttonCreate, buttonSort,buttonResetList,moreInfo;
   @FXML
-  ListView<Event> listViewEvent = new ListView<>();
+  ListView<MyEvent> listViewEvent = new ListView<>();
   @FXML
-  ListProperty<Event> listProperty = new SimpleListProperty<>();
-  ListProperty<Event> listProperty2 = new SimpleListProperty<>();
+  ListProperty<MyEvent> listProperty = new SimpleListProperty<>();
+  ListProperty<MyEvent> listProperty2 = new SimpleListProperty<>();
   @FXML
-  ComboBox<Event> comboBoxSort;
+  ComboBox<MyEvent> comboBoxSort;
   @FXML void handleComboSort (ActionEvent event){
-    Event choseEvent = comboBoxSort.getValue();
-    showOnlyType(events, choseEvent.getClass());
+    MyEvent choseMyEvent = comboBoxSort.getValue();
+    showOnlyType(myEvents, choseMyEvent.getClass());
     listProperty.set(FXCollections.observableArrayList(sortList));
     listViewEvent.setCellFactory(new EventCellFactory()); //Cell Factory allows formatting
   }
+@FXML
+  void handleInfo(ActionEvent event){
+    System.out.println(Global.myEvents.get(0).getNameOfOrg());
 
+  }
 
   @FXML
   void handleCreate(ActionEvent event) {
@@ -75,20 +70,20 @@ public class EventMenuHomeController implements Initializable {
   @FXML
   void handleRestoreList(ActionEvent event){
 
-    listProperty.set(FXCollections.observableArrayList(events));
+    listProperty.set(FXCollections.observableArrayList(myEvents));
     listViewEvent.setCellFactory(new EventCellFactory()); //Cell Factory allows formatting
 
 
   }
 
   @FXML
-  static ArrayList<Event> showOnlyType(List<?> list, Class<? extends Event> c){
+  static ArrayList<MyEvent> showOnlyType(List<?> list, Class<? extends MyEvent> c){
     sortList.clear();
     for (Object o : list){
       if (c.isInstance(o)) { //Check if Object's class is a
         //Class Matches
         System.out.println(o.toString());
-       sortList.add((Event) o);
+       sortList.add((MyEvent) o);
 
 
       }
@@ -105,7 +100,7 @@ public class EventMenuHomeController implements Initializable {
      * May delete this method
      */
     //listViewEvent.itemsProperty().bind(listProperty);
-    sortList= showOnlyType(events,Spa.class); //alls showOnlyType so it only shows objects of Spa class
+    sortList= showOnlyType(myEvents,Spa.class); //alls showOnlyType so it only shows objects of Spa class
 
     listProperty.set(FXCollections.observableArrayList(sortList));
     listViewEvent.setCellFactory(new EventCellFactory()); //Cell Factory allows formatting
@@ -114,28 +109,28 @@ public class EventMenuHomeController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    if (events.isEmpty()) {
+    if (myEvents.isEmpty()) {
       /**
        * This is called first before the window is shown
        * use this to initalize class variables so they are equal to global
        *
        */
-      //No events make a default list
-      Event createEvent = new Event("Royal Ball");
-      events.add(createEvent);
-      createEvent = new Event("ZombieFest");
-      events.add(createEvent);
-      createEvent = new Event("Magic Kingdom!");
-      events.add(createEvent);
-      events.add(new Spa("Spa event"));
-      events.add(new Wedding("Wedding event"));
-      events.add(new Meeting("Meeting event"));
-      events.add(new Spa("Spa event 2"));
+      //No myEvents make a default list
+      MyEvent createMyEvent = new MyEvent("Royal Ball");
+      myEvents.add(createMyEvent);
+      createMyEvent = new MyEvent("ZombieFest");
+      myEvents.add(createMyEvent);
+      createMyEvent = new MyEvent("Magic Kingdom!");
+      myEvents.add(createMyEvent);
+      myEvents.add(new Spa("Spa event"));
+      myEvents.add(new Wedding("Wedding event"));
+      myEvents.add(new Meeting("Meeting event"));
+      myEvents.add(new Spa("Spa event 2"));
 
       listViewEvent.itemsProperty().bind(listProperty); //Bind a list property to listview
-      listProperty.set(FXCollections.observableArrayList(events)); //Set the elements in the list
+      listProperty.set(FXCollections.observableArrayList(myEvents)); //Set the elements in the list
       listViewEvent.setCellFactory(new EventCellFactory()); //Cell Factory allows formatting
-      ArrayList<Event> listofElements = new ArrayList<>();
+      ArrayList<MyEvent> listofElements = new ArrayList<>();
       listofElements.add(new Spa("ShowSpa"));
       listofElements.add(new Meeting("ShowMeeting"));
       listofElements.add(new Wedding("showweeding"));
