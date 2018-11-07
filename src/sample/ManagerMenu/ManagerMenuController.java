@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -87,6 +88,16 @@ import sample.Room.RoomCellFactory;
  *
  * Source for java datePicker info: https://stackoverflow.com/questions/49531768/how-to-fire-an-event-in-datepicker-when-weekday-clicked-in-javafx
  * @author ggraber7402
+ *
+ * ManagaMenuController also handles Employee schedule
+ * The tab ManageSchedule will allow manager to set the hours a employee pays.
+ * The DatePicker(Calender) will let mamnager pick a day, but what the prgram will read is the week
+ * The datepicker has a listener that will call the datePicked method
+ * The hours of the week are changed,
+ * When the manager is done they will click "Update" Button which opens up a popup showing success or failure
+ * If succesfful the program will modify Employee's class varaible daysWorked arraylist with the new data
+ *
+ *
  */
 
 
@@ -141,7 +152,10 @@ public class ManagerMenuController extends Controller implements Initializable {
 
 //  @FXML
 //  private ImageView imageViewRoom;
-  @FXML ComboBox comboBoxStart1,comboBoxStart2,comboBoxStart3,comboBoxStart4,comboBoxStart5,comboBoxStart6,comboBoxStart7,
+  @FXML ListProperty<String> listProperty2 = new SimpleListProperty<>();
+
+  @FXML
+ComboBox comboBoxStart1,comboBoxStart2,comboBoxStart3,comboBoxStart4,comboBoxStart5,comboBoxStart6,comboBoxStart7,
     comboBoxEnd1,comboBoxEnd2,comboBoxEnd3,comboBoxEnd4,comboBoxEnd5,comboBoxEnd6,comboBoxEnd7;
   @FXML Label labelDay1,labelDay2,labelDay3,labelDay4,labelDay5,labelDay6,labelDay7;
   @FXML
@@ -214,6 +228,9 @@ public class ManagerMenuController extends Controller implements Initializable {
 
 
 
+
+
+
     }
     @FXML void handlePickDate(ActionEvent event){
       /**
@@ -231,8 +248,17 @@ public class ManagerMenuController extends Controller implements Initializable {
       labelWeek.setText("Week: "+String.valueOf(weekNumber));
 
 
+  //    comboBoxStart1.setItems(hourList);
+
+
+
+
     }
     @FXML void setupEmployee(Event event){
+      /**
+       *
+       * Schuelde employee tabw as clicked
+       */
       System.out.println("Im here");
 
 
@@ -254,6 +280,34 @@ public class ManagerMenuController extends Controller implements Initializable {
         }
 
 
+
+      }
+
+      ArrayList<ComboBox> comboBoxes = new ArrayList<ComboBox>( Arrays.asList(
+          comboBoxEnd1,comboBoxEnd2,comboBoxEnd3,comboBoxEnd4,comboBoxEnd5,comboBoxEnd6,comboBoxEnd7,
+          comboBoxStart1,comboBoxStart2,comboBoxStart3,comboBoxStart3,comboBoxStart4,comboBoxStart5,comboBoxStart6,
+          comboBoxStart7
+      ));
+      ArrayList<String> hourList =  new ArrayList<>(
+          Arrays.asList(
+              "8:00 AM",
+              "9:00 AM",
+              "10:00 AM",
+              "11:00 AM",
+              "12:00 PM",
+              "1:00 PM",
+              "2:00 PM"
+
+          )
+
+      );
+      listProperty2.set(FXCollections.observableArrayList(hourList));
+      for (ComboBox cb: comboBoxes
+      ) {
+        cb.itemsProperty().bind(listProperty2);
+
+
+        //  cb.setItems(hourList);
 
       }
 

@@ -117,7 +117,10 @@
                               <ComboBox fx:id="comboBoxStart4" layoutX="110.0" layoutY="73.0" prefWidth="150.0" promptText="Starting Hour" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <ComboBox fx:id="comboBoxStart5" layoutX="110.0" layoutY="103.0" prefWidth="150.0" promptText="Starting Hour" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <ComboBox fx:id="comboBoxStart6" layoutX="110.0" layoutY="133.0" prefWidth="150.0" promptText="Starting Hour" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <ComboBox fx:id="comboBoxStart61" layoutX="110.0" layoutY="163.0" prefWidth="150.0" promptText="Starting Hour" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <ComboBox fx:id="comboBoxStart7" layoutX="110.0" layoutY="163.0" prefWidth="150.0" promptText="Starting Hour" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label fx:id="LabelDay41" layoutX="10.0" layoutY="107.0" text="Day" GridPane.rowIndex="4" />
+                              <Label fx:id="LabelDay411" layoutX="10.0" layoutY="137.0" text="Day" GridPane.rowIndex="5" />
+                              <Label fx:id="LabelDay412" layoutX="10.0" layoutY="137.0" text="Day" GridPane.rowIndex="6" />
                            </children>
                         </GridPane>
                         <Label fx:id="labelWeek" layoutX="37.0" layoutY="36.0" text="Week:" />
